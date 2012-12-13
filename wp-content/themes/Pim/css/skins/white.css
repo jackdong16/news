@@ -1,0 +1,9 @@
+#wrapper
+{
+	background: #fff;
+}
+
+.quick_view_wrapper
+{
+	width:750px;height:500px;background:#fff;padding:30px;overflow:auto;
+}

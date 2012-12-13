@@ -1,0 +1,20 @@
+#menu_wrapper ul li, #menu_wrapper ul li:hover, #menu_wrapper ul li.hover, #menu_wrapper ul li.current-menu-item
+{
+	border-right: 0;
+}
+
+.posts h6
+{
+	margin-top: -22px;
+}
+
+#content_wrapper
+{
+	margin-top: -25px;
+}
+
+.top_menu .menu-main-menu-container ul
+{
+	position: relative;
+	left: -15px;
+}

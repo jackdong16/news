@@ -1,0 +1,54 @@
+#wrapper
+{
+	background: #000;
+}
+
+.quick_view_wrapper
+{
+	width:750px;height:500px;background:#000;padding:30px;overflow:auto;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	color: #fff;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a
+{
+	color: #fff;
+}
+
+.post_header h2 a
+{
+	color: #fff;
+}
+
+.post_header .post_detail, .recent_post_detail
+{
+	background: #333;
+}
+
+a, .ui-widget-content a, .ui-accordion .ui-accordion-header a
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #999;
+	text-decoration: none;
+}
+
+hr
+{
+	border-top: 1px solid #555;
+	background: transparent;
+}
+
+ul.children .comment
+{
+	background: #333;
+	border-left: 1px solid #555;
+	border-bottom: 1px solid #555;
+}

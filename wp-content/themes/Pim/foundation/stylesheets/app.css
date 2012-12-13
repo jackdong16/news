@@ -1,0 +1,385 @@
+body{
+	background: none repeat scroll 0 0 #F5F5F5
+}
+
+/** Override Foundation's hr **/
+hr{
+	margin: 10px 0;
+}
+
+.top-bar{
+	max-width: 960px;
+	margin: 0 auto;
+	border-bottom: #0055BF 3px solid
+}
+
+#wrapper{
+	max-width: 960px;
+	margin: 0 auto;
+	-moz-box-shadow: 0 5px 10px #888;
+	-webkit-box-shadow: 0 5px 10px #888;
+	box-shadow: 0 5px 10px #888;
+	background-color: white;
+	padding-top: 10px
+}
+
+/**** Search Box ****/
+.search_box
+{
+	display: block;
+	width: 150px;
+	height: 25px;
+	float: right;
+	margin: 7px 0 0 0;
+	background: transparent url("../../images/search_bg.png") no-repeat top left;
+}
+
+.search_box input, .search_box input:hover
+{
+	width: 100px;
+	margin: 1px 0 0 30px;
+	background: transparent;
+	border: 0;
+}
+
+.search_box input.blur
+{
+	color: #999;
+	font-style: italic;
+}
+
+/**** QUICK VIEW ****/
+
+.quick_view_wrapper
+{
+	width:750px;height:450px;background:#f5f5f5;padding:20px;overflow-y:auto;overflow-x: hidden;
+}
+
+.post_wrapper
+{
+	width: 100%;
+	margin: 0 0 20px 0;
+}
+
+.post_wrapper.single
+{
+	width: 100%;
+	margin: 0;
+}
+
+#comments .bbp-reply-form{
+	display: none;
+}
+
+.sidebar_widget{
+	list-style: none;
+}
+
+
+.ui-state-active, .ui-state-default, .ui-widget-content{
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+}
+
+
+
+.thumb, .home .sidebar_widget li .textwidget .thumb, .sidebar .content .sidebar_widget li ul.thumb
+{
+	list-style: none;
+	display: block;
+	float: left;
+	width: 100%;
+	margin-left: 0;
+}
+
+.thumb li a
+{
+	display: block;
+	float: left;
+}
+
+.thumb img
+{
+	float: left;
+	display: block;
+	width: 60px;
+}
+
+#about_the_author .thumb img
+{
+	float: left;
+	display: block;
+	width: 100px;
+}
+
+.thumb li
+{
+	float: left;
+	display: block;
+	margin: 0 8px 8px 0;
+	clear: none;
+}
+
+#menu_wrapper
+{
+	float: right;
+	background: transparent url("../../images/nav_bg.png") repeat-x top left;
+	margin: 30px 0 30px 0;
+	height: 46px;
+}
+
+#menu_wrapper ul
+{
+	list-style: none;
+	display: block;
+	float: left;
+	margin-top: 1px;
+}
+
+#menu_wrapper ul li
+{
+	display: block;
+	float: left;
+}
+
+#menu_wrapper ul li ul
+{
+	display: none;
+}
+
+#menu_wrapper ul li a
+{
+	display: block;
+	padding: 12px 15px 11px 15px;
+	font-weight: bold;
+	color: #444;
+	text-shadow: 0 1px 1px #fff;
+	height: 20px;
+}
+
+#menu_wrapper ul li
+{
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #f7f7f7;
+}
+
+#menu_wrapper ul li:first-child
+{
+	border-left: 0;
+}
+
+#menu_wrapper ul li:hover, #menu_wrapper ul li.hover, #menu_wrapper ul li.current-menu-item
+{
+	background: #5f5f5f url("../../images/nav_hover.png") repeat-x top left;
+	border-right: 1px solid #5f5f5f;
+}
+
+#menu_wrapper ul li:last-child, #menu_wrapper ul li:last-child:hover, #menu_wrapper ul li:last-child.hover
+{
+	border-right: 0;
+}
+
+#menu_wrapper ul li a:hover, #menu_wrapper ul li.hover a, #menu_wrapper ul li.current-menu-item a
+{
+	color: #fff;
+	text-shadow: 0px -1px 1px #000;
+}
+
+#menu_wrapper ul li ul
+{
+	display: none;
+	list-style: none;
+	background: #5e5e5e;
+	position:absolute;
+	top: 112px;
+	float: none;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+ 	padding: 0 8px 8px 8px;
+ 	width: 150px;
+ 	text-shadow: 0px -1px 1px #000;
+ 	z-index: 1000;
+}
+
+#menu_wrapper ul li ul.sub-menu li
+{
+	float: none;
+	border: 0;
+	margin: 8px 0 0 0;
+	width: 100%;
+	padding: 0 0 2px 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#menu_wrapper ul li ul.sub-menu li a
+{
+	color: #fff;
+	padding: 8px 15px 4px 15px;
+	display: block;
+	text-shadow: 0px -1px 1px #000;
+	background: none;
+}
+
+#menu_wrapper ul li ul.sub-menu li.hover
+{
+	background: #333;
+}
+
+.sidebar .content .sidebar_widget li ul.posts
+{
+	list-style: none;
+	padding: 0 0 40px 0;
+}
+
+.sidebar .content .sidebar_widget li ul.posts, .home .sidebar_widget li ul.posts
+{
+	margin: 0;
+	list-style: none;
+}
+
+.posts li, .sidebar .content .sidebar_widget li ul.posts li
+{
+	padding: 0 0 5px 0;
+}
+
+
+@-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts, .home .sidebar_widget li ul.posts.comments { padding-top: 0; } } 
+
+@-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts li, .sidebar .content .sidebar_widget li .textwidget .one_half ul.posts li { padding: 0 0 20px 0; } } 
+
+@-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts.comments li { padding: 0 0 0 0; } } 
+
+.posts
+{
+	list-style: none;
+}
+
+.posts img
+{
+	float: left;
+	margin: 0 7px 7px 0;
+}
+
+.posts.related img.thumbnail
+{
+	margin: 0 15px 15px 0;
+}
+
+.posts li, .sidebar .content .sidebar_widget li ul.posts li
+{
+	margin: 0 0 30px 0;
+}
+
+.social_media
+{
+	list-style: none;
+	float: left;
+	width: 100%;
+	display: block;
+	margin: 50px 0 50px 0;
+}
+
+.social_media li
+{
+	float: left;
+	display: block;
+	margin-right: 10px;
+}
+
+#footer
+{
+	text-align: center;
+	padding: 0 0 30px 0;
+	font-size: 11px;
+	font-weight: bold;
+	margin-top: 30px;
+	text-shadow: 0 1px 1px #fff;
+}
+
+#footer a
+{
+	color: #999;
+}
+
+#footer ul
+{
+	display: block;
+	margin: auto;
+	list-style: none;
+	padding-bottom: 30px;
+	text-align: left;
+	font-weight: normal;
+}
+
+#footer ul li.widget
+{
+	float: left;
+	width: 17%;
+	margin-right: 3%;
+}
+
+#footer ul li.widget .widgettitle
+{
+	margin: 0 0 20px 0;
+	font-size: 20px;
+	text-shadow: 0 1px 1px transparent;
+}
+
+#footer ul li.widget ul
+{
+	width: 100%;
+	float: left;
+}
+
+#footer ul li.widget ul li
+{
+	margin: 0 0 10px 0;
+}
+
+#footer
+{
+	background: #555 url('../../images/bg_ip2.png') repeat-x top;
+	padding-top: 50px;
+	text-shadow: 0 0 0 transparent;
+}
+
+#footer .widgettitle
+{
+	color: #fff;
+	font-weight: normal;
+}
+
+#footer .posts img
+{
+	width: 50px;
+}
+
+#footer .posts h6
+{
+	font-size: 16px;
+	color: #fff;
+}
+
+/********   MOBILE SPECIFIC *******/
+@media only screen and (max-width: 767px){
+	.quick_view{
+		display: none;
+	}
+}
+
+
+
+/******** 	HACKS	******/
+
+/* Hassle to modify text widget h4 to h5 */
+.sidebar_widget h2{
+	font-size: 20px;
+}
+
+
