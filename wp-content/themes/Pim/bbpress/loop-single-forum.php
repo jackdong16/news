@@ -47,7 +47,7 @@
 
 		<?php do_action( 'bbp_theme_after_forum_freshness_link' ); ?>
 
-		<p class="bbp-topic-meta">
+		<!--<p class="bbp-topic-meta">
 
 			<?php do_action( 'bbp_theme_before_topic_author' ); ?>
 
@@ -55,7 +55,7 @@
 
 			<?php do_action( 'bbp_theme_after_topic_author' ); ?>
 
-		</p>
+		</p>-->
 	</li>
 
 </ul><!-- #bbp-forum-<?php bbp_forum_id(); ?> -->

@@ -53,6 +53,8 @@
 
 		<?php do_action( 'bbp_theme_before_topic_meta' ); ?>
 
+		<!--
+
 		<p class="bbp-topic-meta">
 
 			<?php do_action( 'bbp_theme_before_topic_started_by' ); ?>
@@ -73,13 +75,17 @@
 
 		</p>
 
+	-->
+
 		<?php do_action( 'bbp_theme_after_topic_meta' ); ?>
 
 		<?php bbp_topic_row_actions(); ?>
 
 	</li>
 
-	<li class="bbp-topic-voice-count"><?php bbp_topic_voice_count(); ?></li>
+	<!--<li class="bbp-topic-voice-count"><?php bbp_topic_voice_count(); ?></li>-->
+
+	<li class="bbp-topic-voice-count"><?php echo bbp_get_topic_author_link( array( 'size' => '14' )); ?></li>
 
 	<li class="bbp-topic-reply-count"><?php bbp_show_lead_topic() ? bbp_topic_reply_count() : bbp_topic_post_count(); ?></li>
 
@@ -91,7 +97,7 @@
 
 		<?php do_action( 'bbp_theme_after_topic_freshness_link' ); ?>
 
-		<p class="bbp-topic-meta">
+		<!--<p class="bbp-topic-meta">
 
 			<?php do_action( 'bbp_theme_before_topic_freshness_author' ); ?>
 
@@ -99,7 +105,7 @@
 
 			<?php do_action( 'bbp_theme_after_topic_freshness_author' ); ?>
 
-		</p>
+		</p>-->
 	</li>
 
 </ul><!-- #topic-<?php bbp_topic_id(); ?> -->
