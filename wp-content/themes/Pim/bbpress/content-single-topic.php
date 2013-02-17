@@ -46,7 +46,7 @@
 
 		<?php endif; ?>
 
-		<button class="button submit" name="bbp_reply" id="bbp_reply" tabindex="104" type="reply" onclick="$('.bbp-reply-form').show();$('#bbp_reply').hide();">Reply</button>
+		<button class="button submit" name="bbp_reply" id="bbp_reply" tabindex="104" type="reply" onclick="$('.bbp-reply-form').show();$('#bbp_reply').hide();">回复</button>
 
 		<?php bbp_get_template_part( 'form', 'reply' ); ?>
 

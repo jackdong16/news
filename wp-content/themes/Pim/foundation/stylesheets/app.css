@@ -23,6 +23,16 @@ hr{
 	padding-top: 10px
 }
 
+
+/**** Forum ****/
+.bbp-reply-form{
+	display: none;
+}
+
+.bbp-topic-form{
+	display: none;
+}
+
 /**** Search Box ****/
 .search_box
 {
@@ -65,10 +75,6 @@ hr{
 {
 	width: 100%;
 	margin: 0;
-}
-
-#comments .bbp-reply-form{
-	display: none;
 }
 
 .sidebar_widget{
@@ -243,6 +249,11 @@ hr{
 	list-style: none;
 }
 
+.sidebar_widget .post_content{
+	overflow: hidden;
+	width: 100%;
+}
+
 .posts li, .sidebar .content .sidebar_widget li ul.posts li
 {
 	padding: 0 0 5px 0;
@@ -251,7 +262,7 @@ hr{
 
 @-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts, .home .sidebar_widget li ul.posts.comments { padding-top: 0; } } 
 
-@-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts li, .sidebar .content .sidebar_widget li .textwidget .one_half ul.posts li { padding: 0 0 20px 0; } } 
+@-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts li, .sidebar .content .sidebar_widget li .textwidget .one_half ul.posts li { padding: 0 0 0 0; } } 
 
 @-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts.comments li { padding: 0 0 0 0; } } 
 

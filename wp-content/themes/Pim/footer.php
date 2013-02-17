@@ -24,7 +24,7 @@
 	
 					if(empty($pp_footer_text))
 					{
-						$pp_footer_text = 'Copyright © 2010 Peerapong';
+						$pp_footer_text = 'Copyright © 2013 :)';
 					}
 					
 					echo $pp_footer_text;
