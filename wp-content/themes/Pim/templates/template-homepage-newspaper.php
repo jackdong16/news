@@ -1,8 +1,46 @@
-<div id="content_wrapper">
-		<div class="row">
+<!--<div id="content_wrapper">-->
+<div class="row-fluid">
+	<div class="span9">
+				    <a class="brand" href="#">
+	    	<?php
+				//get custom logo
+				$pp_logo = get_option('pp_logo');
+				
+				if(empty($pp_logo))
+				{	
+					if($pp_skin != 'black')
+					{
+						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_black.png';
+					}
+					else
+					{
+						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_white.png';
+					}
+				}
+			?>
+			<h2><?php bloginfo('name'); ?></h2>
+			<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a></a>
+            <?php 	
+				wp_nav_menu( 
+					array( 
+						'menu_id'			=> 'main_nav',
+			        	'menu_class'		=> 'nav',
+						'theme_location' 	=> 'primary-menu',
+					) 
+				);
+			?>
+	</div>
+</div>
 
-		<div class="six columns push-three">
-			<?php
+
+<div class="row-fluid">
+	<div class="span3">
+		<ul class="sidebar_widget">
+				<?php dynamic_sidebar('Home Left Sidebar'); ?>
+			</ul>
+	</div>
+	<div class="span6">
+		<?php
 				if(!empty($featured_posts_arr))
 				{
 			?>
@@ -43,20 +81,10 @@
 			<ul class="sidebar_widget">
 				<?php dynamic_sidebar('Home Center Sidebar'); ?>
 			</ul>
-		</div>
-			
-		<div class="three columns pull-six">
-		<!--<div class="one_fourth home_left">-->
-			<ul class="sidebar_widget">
-				<?php dynamic_sidebar('Home Left Sidebar'); ?>
-			</ul>
-		</div>
-		
-		<div class="three columns">
-		<!--<div class="one_fourth home last">-->
-			<ul class="sidebar_widget">
+	</div>
+	<div class="span3">
+		<ul class="sidebar_widget">
 				<?php dynamic_sidebar('Home Right Sidebar'); ?>
 			</ul>
-		</div>
 	</div>
 </div>

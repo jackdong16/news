@@ -6,22 +6,13 @@
  * @subpackage Pim
  */
 ?>
-<div class="row">
-	<div class="twelve columns">
-		<div id="footer">
-			<ul class="sidebar_widget">
-				<?php dynamic_sidebar('Footer Sidebar'); ?>
-			</ul>
-			
-			<br class="clear"/>
-			<div id="copyright">
-				<?php
-					/**
-					 * Get footer text
-					 */
-	
+
+		<footer class="footer">
+	      <!-- div class="container-fluid"> -->
+	        <?php
+
 					$pp_footer_text = get_option('pp_footer_text');
-	
+
 					if(empty($pp_footer_text))
 					{
 						$pp_footer_text = 'Copyright © 2013 :)';
@@ -29,14 +20,19 @@
 					
 					echo $pp_footer_text;
 				?>
-			</div>
-			
-		</div>
-		<!-- End footer -->
-		
-	</div>
-</div>
-
+	        <?php 	
+					//Get page nav
+					wp_nav_menu( 
+						array( 
+							'menu_id'			=> 'footer_menu',
+							'menu_class'		=> 'footer-links',
+							'theme_location' 	=> 'footer-menu',
+						) 
+					);
+			?>
+	      <!-- </div> -->
+	    </footer>
+	    </div>
 <?php
 		/**
     	*	Setup Google Analyric Code

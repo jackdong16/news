@@ -10,8 +10,8 @@ get_header();
 
 ?>
 
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<?php peerapong_breadcrumbs(); ?><br/>
 			
 		<?php
@@ -58,15 +58,12 @@ get_header();
 		<?php endwhile; endif; ?>
 
 		<div class="pagination"><p><?php posts_nav_link(' '); ?></p></div>
-
 	</div>
-
-	<div class="three columns">
+	<div class="span3">
 		<ul class="sidebar_widget">
 			<?php dynamic_sidebar('Blog Sidebar'); ?>
 		</ul>
 	</div>
-</div>
-				
+</div>				
 
 <?php get_footer(); ?>

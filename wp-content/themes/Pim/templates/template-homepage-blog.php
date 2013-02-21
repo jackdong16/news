@@ -1,4 +1,8 @@
-<div id="content_wrapper">
+
+<!-- NOT USING THIS RIGHT NOW - USING THE NEWSPAPER VERSION -->
+
+<!--<div id="content_wrapper">-->
+
 		<div class="two_third">
 			<h2>Top News</h2><hr/>
 			
@@ -45,10 +49,10 @@
 			
 			<?php
 
-if (have_posts()) : while (have_posts()) : the_post();
+			if (have_posts()) : while (have_posts()) : the_post();
 
-	$image_thumb = get_post_meta(get_the_ID(), 'blog_thumb_image_url', true);
-?>
+				$image_thumb = get_post_meta(get_the_ID(), 'blog_thumb_image_url', true);
+			?>
 						
 						
 	<!-- Begin each blog post -->

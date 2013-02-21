@@ -24,15 +24,15 @@ if (have_posts()) : while (have_posts()) : the_post();
 ?>
 
 <!--Title-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<h2><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
 	</div>
 </div>
 
 <!--Post Details-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<div class="post_detail">
 			Posted by:&nbsp;<?php the_author_posts_link(); ?>&nbsp;&nbsp;&nbsp;
 			Tags:&nbsp;
@@ -59,11 +59,11 @@ if (have_posts()) : while (have_posts()) : the_post();
 </div>-->
 
 <!--Content-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<?php echo the_content(); ?>
 	</div>
-	<div class="three columns">
+	<div class="span3">
 		<ul class="sidebar_widget">
 			<?php dynamic_sidebar('Blog Sidebar'); ?>
 		</ul>
@@ -71,8 +71,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 </div>
 
 <!--Social Media-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<ul class="social_media">
 			<h5>Share This</h5>
 			<hr/>
@@ -155,8 +155,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 -->
 							
 <!--List 5 post titles related to first tag on current post-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<?php
 		//for use in the loop, list 5 post titles related to first tag on current post
 		$tags = wp_get_post_tags($post->ID);
@@ -191,8 +191,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 </div>					
 
 <!--Comments-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<?php comments_template( '' ); ?>
 	</div>
 </div>
@@ -200,8 +200,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 <?php endwhile; endif; ?>
 
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<div class="sidebar_bottom"></div>
 	</div>
 </div>

@@ -32,7 +32,7 @@
 
 			<?php do_action( 'login_form' ); ?>
 
-			<button type="submit" tabindex="<?php bbp_tab_index(); ?>" name="user-submit" class="button submit user-submit"><?php _e( 'Log In', 'bbpress' ); ?></button>
+			<button type="submit" tabindex="<?php bbp_tab_index(); ?>" name="user-submit" class="btn submit user-submit"><?php _e( 'Log In', 'bbpress' ); ?></button>
 
 			<?php bbp_user_login_fields(); ?>
 

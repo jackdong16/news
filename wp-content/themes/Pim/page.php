@@ -66,16 +66,16 @@ get_header();
 
 <?php if ( 'forum' != get_post_type() ){ //Dont display the title if it's the forum page ?>
 <!--Title-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<h2><?php the_title(); ?></h2>
 	</div>
 </div>
 <?php } ?>
 
 <!--Content-->
-<div class="row">
-	<div class="nine columns">
+<div class="row-fluid">
+	<div class="span9">
 		<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>		
 						
 			<?php if($add_sidebar) { ?>

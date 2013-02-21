@@ -28,7 +28,7 @@
 <?php if ( bbp_current_user_can_access_create_topic_form() ) : ?>
 
 	<?php //if ( !bbp_is_topic_edit() ) ?>
-		<button class="button submit" name="bbp_create" id="bbp_create" tabindex="104" type="reply" onclick="$('.bbp-topic-form').show();$('#bbp_create').hide();">新建</button>
+		<button class="btn submit" name="bbp_create" id="bbp_create" tabindex="104" type="reply" onclick="$('.bbp-topic-form').show();$('#bbp_create').hide();">新建</button>
 	<?php //endif; ?>
 
 	<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form">
@@ -199,7 +199,7 @@
 
 						<?php do_action( 'bbp_theme_before_topic_form_submit_button' ); ?>
 
-						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="button submit"><?php _e( 'Submit', 'bbpress' ); ?></button>
+						<button type="submit" tabindex="<?php bbp_tab_index(); ?>" id="bbp_topic_submit" name="bbp_topic_submit" class="btn submit"><?php _e( 'Submit', 'bbpress' ); ?></button>
 
 						<?php do_action( 'bbp_theme_after_topic_form_submit_button' ); ?>
 
