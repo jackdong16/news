@@ -29,7 +29,7 @@ include (TEMPLATEPATH . "/lib/custom.lib.php");
 include (TEMPLATEPATH . "/lib/shortcode.lib.php");
 
 // Register Custom Navigation Walker
-require_once('twitter_bootstrap_nav_walker.php');
+//require_once('twitter_bootstrap_nav_walker.php');
 
 /**
 *	Setup Menu

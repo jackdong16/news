@@ -1,5 +1,6 @@
 body{
  background-color: #FEFFF2;
+ padding: 0;
 }
 
 .top-bar{
@@ -8,6 +9,10 @@ body{
 	/**border-bottom: #0055BF 3px solid;**/
 	border-bottom: 1px solid black;
 	background-color: #C6E1FC;
+}
+
+.navbar-inner{
+	border-radius: 0;
 }
 
 .main{
@@ -21,6 +26,8 @@ body{
 .container-fluid{
 	max-width: 960px;
 	margin: 0 auto;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #wrapper{
@@ -63,6 +70,12 @@ body{
     line-height: 35px;
 }
 
+#main_nav li a {
+	color: black;
+	font-weight: bold;
+	font-size: 14px;
+}
+
 #main_nav li .sub-menu{
 	display: none;
 }
@@ -72,7 +85,15 @@ body{
 	margin-bottom: 0;
 }
 
+#crumbs{
+	display: none;
+}
+
 /**** Forum ****/
+#bbpress-forums *{
+	font-size: 13px;
+}
+
 .bbp-reply-form, .bbp-topic-form{
 	display: none;
 }
@@ -107,7 +128,6 @@ body{
 	border: 1px solid black;
 }
 
-
 /**** QUICK VIEW ****/
 
 .quick_view_wrapper
@@ -129,6 +149,7 @@ body{
 
 .sidebar_widget{
 	list-style: none;
+	margin: 0;
 }
 
 
@@ -302,6 +323,7 @@ body{
 .sidebar_widget .post_content{
 	overflow: hidden;
 	width: 100%;
+	display: none;
 }
 
 .posts li, .sidebar .content .sidebar_widget li ul.posts li
@@ -312,7 +334,7 @@ body{
 
 @-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts, .home .sidebar_widget li ul.posts.comments { padding-top: 0; } } 
 
-@-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts li, .sidebar .content .sidebar_widget li .textwidget .one_half ul.posts li { padding: 0 0 0 0; } } 
+@-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts li, .sidebar .content .sidebar_widget li .textwidget .one_half ul.posts li { padding: 0 0 10px; border-bottom: 1px solid #efefef} } 
 
 @-moz-document url-prefix() { .sidebar .content .sidebar_widget li ul.posts li, .home .sidebar_widget li ul.posts.comments li { padding: 0 0 0 0; } } 
 
@@ -334,7 +356,8 @@ body{
 
 .posts li, .sidebar .content .sidebar_widget li ul.posts li
 {
-	margin: 0 0 30px 0;
+	margin: 0 0 10px 0;
+	height: 60px;
 }
 
 .social_media
@@ -462,6 +485,7 @@ body{
 /* Hassle to modify text widget h4 to h5 */
 .sidebar_widget h2{
 	font-size: 20px;
+	display: none;
 }
 
 

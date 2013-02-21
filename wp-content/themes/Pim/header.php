@@ -63,7 +63,7 @@
 
 <!-- Template stylesheet -->
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/jqueryui/custom.css" type="text/css" media="all"/>
-<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/NOscreen.css" type="text/css" media="all"/>
+<!-- <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/NOscreen.css" type="text/css" media="all"/> -->
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/tipsy.css" type="text/css" media="all"/>
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/bootstrap/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/bootstrap/css/app.css" type="text/css">
@@ -102,8 +102,8 @@ if(empty($pp_header_font) OR ($pp_header_font == 'Sansation_Regular-webfont'))
 <![endif]-->
 
 <!-- Jquery and plugins -->
-<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.js"></script>
-<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery-ui-1.10.1.custom.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/fancybox/jquery.fancybox-1.3.0.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.validate.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/hint.js"></script>
@@ -206,16 +206,45 @@ if(isset($_GET['s']))
 				<?php
 					}
 				?>
-		  			<!--<form class="search_box" action="<?php bloginfo( 'url' ); ?>" method="get">
-						<input type="text" title="Search.." id="s" name="s" value="<?php echo $search_key; ?>"/>
-					</form>-->
-				
 			</ul>
 			    </div>
 		    
 	    </div>
     </div>
 <div class="main container-fluid">
+
+	<div class="row-fluid">
+		<div class="span9">
+				<a class="brand" href="<?php bloginfo( 'url' ); ?>">
+		    	<?php
+					//get custom logo
+					$pp_logo = get_option('pp_logo');
+					
+					if(empty($pp_logo))
+					{	
+						if($pp_skin != 'black')
+						{
+							//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_black.png';
+						}
+						else
+						{
+							//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_white.png';
+						}
+					}
+				?>
+				<h2><?php bloginfo('name'); ?></h2>
+				<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a></a>
+	            <?php 	
+					wp_nav_menu( 
+						array( 
+							'menu_id'			=> 'main_nav',
+				        	'menu_class'		=> 'nav',
+							'theme_location' 	=> 'primary-menu',
+						) 
+					);
+				?>
+		</div>
+	</div>
 
 	<!--<div class="row-fluid">
 		<div class="span4">

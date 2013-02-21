@@ -2,3 +2,7 @@
 SecFilterEngine Off
 SecFilterScanPOST Off
 </IfModule>
+
+# BEGIN WordPress
+
+# END WordPress

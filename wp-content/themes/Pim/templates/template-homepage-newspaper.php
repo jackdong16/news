@@ -1,38 +1,3 @@
-<!--<div id="content_wrapper">-->
-<div class="row-fluid">
-	<div class="span9">
-				    <a class="brand" href="#">
-	    	<?php
-				//get custom logo
-				$pp_logo = get_option('pp_logo');
-				
-				if(empty($pp_logo))
-				{	
-					if($pp_skin != 'black')
-					{
-						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_black.png';
-					}
-					else
-					{
-						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_white.png';
-					}
-				}
-			?>
-			<h2><?php bloginfo('name'); ?></h2>
-			<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a></a>
-            <?php 	
-				wp_nav_menu( 
-					array( 
-						'menu_id'			=> 'main_nav',
-			        	'menu_class'		=> 'nav',
-						'theme_location' 	=> 'primary-menu',
-					) 
-				);
-			?>
-	</div>
-</div>
-
-
 <div class="row-fluid">
 	<div class="span3">
 		<ul class="sidebar_widget">
@@ -41,46 +6,75 @@
 	</div>
 	<div class="span6">
 		<?php
-				if(!empty($featured_posts_arr))
-				{
-			?>
-			
-			<div id="featured_posts">
-			
-			<?php
-					foreach($featured_posts_arr as $featured_post)
-					{
-						$image_url = get_post_meta($featured_post->ID, 'blog_thumb_image_url', true);
-			?>
-					<h4>
-						<a href="#">
-							<?php echo $featured_post->post_title; ?>
-						</a>
-					</h4>
-					<div>
-						<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/timthumb.php?src=<?php echo $image_url; ?>&amp;h=300&amp;w=460&amp;zc=1" alt=""/>
-						<br/><br/>
-						<?php echo _substr(strip_tags(strip_shortcodes($featured_post->post_content)), 300); ?>
-						<br/><br/>
-						<a href="<?php echo gen_permalink($featured_post->guid, 'quick_view=1'); ?>" class="quick_view"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_quick_view.png" style="width:16px" class="mid_align"/>&nbsp;<strong>预览</strong></a>
-						&nbsp;|&nbsp;
-						<a href="<?php echo $featured_post->guid; ?>" title="<?php echo $featured_post->post_title; ?>"><strong>看全文</strong></a>
-						<br/><br/><hr/>
-					</div>
-			<?php
-					}
-			?>
-			
+			if(!empty($featured_posts_arr))
+			{
+		?>
+				<div id="myCarousel" class="carousel slide">
+				    <ol class="carousel-indicators">
+					    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					    <li data-target="#myCarousel" data-slide-to="1"></li>
+					    <li data-target="#myCarousel" data-slide-to="2"></li>
+					    <li data-target="#myCarousel" data-slide-to="3"></li>
+					    <li data-target="#myCarousel" data-slide-to="4"></li>
+				    </ol>
+						<div class="carousel-inner">
+							<?php
+								$first_flag = true;
+								foreach($featured_posts_arr as $featured_post)
+								{
+									$image_url = get_post_meta($featured_post->ID, 'blog_thumb_image_url', true);	
+							?>
+
+									<div class="<?php if ($first_flag) echo "active" ?> item">
+										<a href="<?php echo $featured_post->guid; ?>" title="<?php echo $featured_post->post_title; ?>">
+											<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/timthumb.php?src=<?php echo $image_url; ?>&amp;h=300&amp;w=460&amp;zc=1" alt=""/>
+									    	<div class="carousel-caption">
+							                  <h4><?php echo $featured_post->post_title; ?></h4>
+							                  <!-- <p><?php echo _substr(strip_tags(strip_shortcodes($featured_post->post_content)), 300); ?></p> -->
+							                </div>
+						                </a>
+									</div>
+
+							<?php
+									$first_flag = false;
+								}
+							?>
+					
+						</div>
+					<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+					<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 				</div>
-				
-			<?php
-				}
-			?>
-			
-			<br class="clear"/><br/>
-			<ul class="sidebar_widget">
-				<?php dynamic_sidebar('Home Center Sidebar'); ?>
-			</ul>
+		<?php
+			}
+		?>
+		
+		<br class="clear"/>
+		
+	    <ul class="nav nav-tabs" id="myTab">
+	    <li><a href="#popular" data-toggle="tab">热门</a></li>
+	    <li><a href="#commented" data-toggle="tab">最多讨论</a></li>
+	    <li><a href="#liked" data-toggle="tab">最多喜欢</a></li>
+	    </ul>
+
+	    <div class="tab-content">
+			<div class="tab-pane active" id="popular">
+				<ul class="sidebar_widget">
+					<?php dynamic_sidebar('Home Center Sidebar'); ?>
+				</ul>
+			</div>
+			<div class="tab-pane" id="commented">...</div>
+			<div class="tab-pane" id="liked">...</div>
+		</div>
+
+
+	    <script>
+			$(function () {
+				$('#myTab a[href="#popular"]').tab('show'); 
+			// $('#myTab a:first').tab('show');
+			})
+		</script>
+
+		
 	</div>
 	<div class="span3">
 		<ul class="sidebar_widget">

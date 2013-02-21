@@ -446,7 +446,8 @@ function peerapong_photos_in_news($items = 10, $echo = TRUE)
 			foreach($posts as $post)
 			{
 				$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
-				$return_html.= '<li><a href="'.get_permalink($post->ID).'" title="'.$post->post_title.'"><img class="resize" src="'.get_bloginfo( 'stylesheet_directory' ).'/timthumb.php?src='.$image_thumb.'&amp;h=60&amp;w=60&amp;zc=1" alt="" /></a></li>';
+        if ($image_thumb)
+ 				 $return_html.= '<li><a href="'.get_permalink($post->ID).'" title="'.$post->post_title.'"><img class="resize" src="'.get_bloginfo( 'stylesheet_directory' ).'/timthumb.php?src='.$image_thumb.'&amp;h=60&amp;w=60&amp;zc=1" alt="" /></a></li>';
 
 			}	
 
