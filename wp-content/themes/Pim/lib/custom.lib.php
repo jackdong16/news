@@ -329,9 +329,10 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE)
 			foreach($posts as $post)
 			{
 				$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
-				$return_html.= '<li><div><a href="'.get_permalink($post->ID).'"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/timthumb.php?src='.$image_thumb.'&amp;h=60&amp;w=60&amp;zc=1" alt="" /></a></div><div><a href="'.get_permalink($post->ID).'">';
-				$return_html.= peerapong_substr($post->post_title, 50).'</a></div><span><a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a></span><div>'.date('F j', strtotime($post->post_date)).'</div>';
-				$return_html.= '<div class="post_content">'.peerapong_substr(strip_tags(strip_shortcodes($post->post_content)), 80).'</div></li>';
+				$return_html.= '<li><div><a href="'.get_permalink($post->ID).'"><img onerror="imgError(this);" class="thumbnail" src="'.get_bloginfo( 'stylesheet_directory' ).'/timthumb.php?src='.$image_thumb.'&amp;h=60&amp;w=60&amp;zc=1" alt="" /></a></div>';
+        $return_html.= '<div><a href="'.get_permalink($post->ID).'">'.peerapong_substr($post->post_title, 50).'</a>';
+				$return_html.= '<span><a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a></span><div>'.date('F j', strtotime($post->post_date)).'</div>';
+				$return_html.= '<div class="post_content">'.peerapong_substr(strip_tags(strip_shortcodes($post->post_content)), 80).'</div></div></li>';
 
 			}	
 

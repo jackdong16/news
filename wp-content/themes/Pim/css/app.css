@@ -1,7 +1,17 @@
+/** Happyvan CSS **/
+
+/** Override Bootstrap **/
 body{
- background-color: #FEFFF2;
- padding: 0;
+	color: #0C3045;
+	background-color: #F2E9E1;
+	padding: 0;
 }
+
+a {
+	color: #397591;
+}
+
+
 
 .top-bar{
 	max-width: 960px;
@@ -40,6 +50,10 @@ body{
 	padding-top: 10px
 }
 
+.brand{
+	color: #0C3045;
+}
+
 /**** TOP NAV ****/
 #main_nav{
 	border-bottom: 1px solid gray;
@@ -51,9 +65,21 @@ body{
     margin-bottom: 10px;
 }
 
-#main_nav .menu-item {
+#main_nav a:hover, #main_nav a:focus{
+	
+} 
+
+/*#main_nav > li > a:hover, #main_nav > li > a:focus {
+    background-color: #D1C5A2;
+    text-decoration: none;
+}*/
+
+#main_nav > .menu-item > a:hover, 
+#main_nav > .menu-item > a:focus{
     /*margin-top: 5px;*/
     /*width: 100%;*/
+    background-color: #D1C5A2;
+    text-decoration: none;
 }
 
 #main_nav li {
@@ -89,13 +115,27 @@ body{
 	display: none;
 }
 
-/**** Forum ****/
+/**** BBPress Forum ****/
 #bbpress-forums *{
 	font-size: 13px;
 }
 
-.bbp-reply-form, .bbp-topic-form{
+#bbpress-forums ul.bbp-lead-topic, #bbpress-forums ul.bbp-topics, #bbpress-forums ul.bbp-forums, #bbpress-forums ul.bbp-replies{
+	border: 1px solid #0C3045;
+}
+
+#bbpress-forums .bbp-reply-form, .bbp-topic-form{
 	display: none;
+}
+
+#bbpress-forums li.bbp-header, #bbpress-forums li.bbp-footer{
+	background: none repeat scroll 0 0 #397591;
+	color: #D1C5A2;
+	border: 0;
+}
+
+#bbpress-forums .bbp-header a{
+	color: #D1C5A2;
 }
 
 /**** Search Box ****/
@@ -158,7 +198,13 @@ body{
 	border: 0 none;
 }
 
+.wide_thumbail .post_content{
 
+}
+
+.narrow_thumbnail .post_content{
+	width: 100%;
+}
 
 .thumb, .home .sidebar_widget li .textwidget .thumb, .sidebar .content .sidebar_widget li ul.thumb
 {
@@ -322,8 +368,6 @@ body{
 
 .sidebar_widget .post_content{
 	overflow: hidden;
-	width: 100%;
-	display: none;
 }
 
 .posts li, .sidebar .content .sidebar_widget li ul.posts li
@@ -343,7 +387,7 @@ body{
 	list-style: none;
 }
 
-.posts img
+.posts .thumbnail
 {
 	float: left;
 	margin: 0 7px 7px 0;
@@ -357,7 +401,6 @@ body{
 .posts li, .sidebar .content .sidebar_widget li ul.posts li
 {
 	margin: 0 0 10px 0;
-	height: 60px;
 }
 
 .social_media

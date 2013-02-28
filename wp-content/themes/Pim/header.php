@@ -66,7 +66,7 @@
 <!-- <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/NOscreen.css" type="text/css" media="all"/> -->
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/tipsy.css" type="text/css" media="all"/>
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/bootstrap/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/bootstrap/css/app.css" type="text/css">
+<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/app.css" type="text/css">
 
 
 <?php
@@ -111,7 +111,7 @@ if(empty($pp_header_font) OR ($pp_header_font == 'Sansation_Regular-webfont'))
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/browser.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/custom.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/bootstrap/js/bootstrap.js"></script>
-
+<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/app.js"></script>
 </head>
 
 <?php
@@ -212,7 +212,6 @@ if(isset($_GET['s']))
 	    </div>
     </div>
 <div class="main container-fluid">
-
 	<div class="row-fluid">
 		<div class="span9">
 				<a class="brand" href="<?php bloginfo( 'url' ); ?>">
