@@ -11,6 +11,13 @@ a {
 	color: #397591;
 }
 
+legend {
+  line-height: 20px !important;
+  margin-bottom: 0 !important;
+  width: initial !important;
+  border-style: initial !important;
+}
+
 
 
 .top-bar{
@@ -55,6 +62,10 @@ a {
 }
 
 /**** TOP NAV ****/
+#m_nav{
+	
+}
+
 #main_nav{
 	border-bottom: 1px solid gray;
     border-top: 1px solid gray;
@@ -124,8 +135,16 @@ a {
 	border: 1px solid #0C3045;
 }
 
-#bbpress-forums .bbp-reply-form, .bbp-topic-form{
+#bbpress-forums .bbp-reply-form, #bbpress-forums .bbp-topic-form-create{
 	display: none;
+}
+
+#bbpress-forums ul.super-sticky > .bbp-topic-title > a{
+	color: orange;
+}
+
+#bbpress-forums ul.super-sticky > .bbp-topic-title > a{
+	color: red;
 }
 
 #bbpress-forums li.bbp-header, #bbpress-forums li.bbp-footer{
@@ -187,7 +206,7 @@ a {
 	margin: 0;
 }
 
-.sidebar_widget{
+.sidebar_widget, .widget{
 	list-style: none;
 	margin: 0;
 }

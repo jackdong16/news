@@ -27,11 +27,14 @@
 
 <?php if ( bbp_current_user_can_access_create_topic_form() ) : ?>
 
-	<?php //if ( !bbp_is_topic_edit() ) ?>
-		<button class="btn submit" name="bbp_create" id="bbp_create" tabindex="104" type="reply" onclick="$('.bbp-topic-form').show();$('#bbp_create').hide();">发表新帖</button>
-	<?php //endif; ?>
+	<?php if ( !bbp_is_topic_edit() ) : ?>
+		<button class="btn submit" name="bbp_create" id="bbp_create" tabindex="104" type="reply" onclick="$('.bbp-topic-form-create').show();$('#bbp_create').hide();">发表新帖</button>
 
+	<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form-create">
+	<?php else : ?>
 	<div id="new-topic-<?php bbp_topic_id(); ?>" class="bbp-topic-form">
+	<?php endif; ?>
+
 
 		<form id="new-post" name="new-post" method="post" action="<?php the_permalink(); ?>">
 

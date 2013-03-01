@@ -164,7 +164,7 @@ if(isset($_GET['s']))
 			?>
 
 			<form class="navbar-search pull-right">
-		    	<input type="text" class="search-query" placeholder="搜索">
+		    	<input type="text" class="input-small search-query" placeholder="搜索">
 		    </form>
 
 			<ul class="nav pull-right">
@@ -206,6 +206,12 @@ if(isset($_GET['s']))
 				<?php
 					}
 				?>
+
+				<li><?php wp_loginout(); ?></li>
+                <li><?php wp_register(' ' , ' '); ?></li>
+                <!-- <li><a href="wp-login.php" class="simplemodal-login">Log In</a></li>
+                <li><a href="wp-login.php?action=register" class="simplemodal-register">Register</a></li> -->
+                
 			</ul>
 			    </div>
 		    
@@ -234,16 +240,31 @@ if(isset($_GET['s']))
 				<h2><?php bloginfo('name'); ?></h2>
 				<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a></a>
 	            <?php 	
-					wp_nav_menu( 
-						array( 
-							'menu_id'			=> 'main_nav',
-				        	'menu_class'		=> 'nav',
-							'theme_location' 	=> 'primary-menu',
-						) 
-					);
+					// wp_nav_menu( 
+					// 	array( 
+					// 		'menu_id'			=> 'main_nav',
+				 //        	'menu_class'		=> 'nav',
+					// 		'theme_location' 	=> 'primary-menu',
+					// 	) 
+					// );
 				?>
+					<!-- <div class="navbar">
+	    <div class="navbar-inner"> -->
+	    	<div id="m_nav">
+				<?php 
+				    wp_nav_menu( array(
+				        'menu'       => 'main_nav',
+				        'depth'      => 2,
+				        'container'  => false,
+				        'menu_class' => 'nav nav-pills',
+				        'theme_location' => 'primary-menu',
+				        //Process nav menu using our custom nav walker
+				        'walker' => new twitter_bootstrap_nav_walker())
+				    );
+				?>
+			</div>
 		</div>
-	</div>
+		</div>
 
 	<!--<div class="row-fluid">
 		<div class="span4">

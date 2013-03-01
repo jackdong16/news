@@ -23,6 +23,9 @@ if ( function_exists('register_sidebar') )
 if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'Home Bottom Center Sidebar'));
 
+if ( function_exists('register_sidebar') )
+    register_sidebar(array('name' => 'Forum Login Sidebar'));
+
 /**
 *	Setup Page side bar
 **/

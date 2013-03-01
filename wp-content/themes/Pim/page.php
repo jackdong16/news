@@ -114,8 +114,10 @@ get_header();
 			}
 		?>
 	</div>
+	<div class="span3">
+		<?php dynamic_sidebar( 'Forum Login Sidebar' ); ?>
+	</div>
 </div>
-
 
 <?php get_footer(); ?>
 

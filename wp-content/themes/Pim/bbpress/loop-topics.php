@@ -37,11 +37,11 @@
 
 	<li class="bbp-footer">
 
-		<div class="tr">
+		<!-- <div class="tr">
 			<p>
 				<span class="td colspan<?php echo ( bbp_is_user_home() && ( bbp_is_favorites() || bbp_is_subscriptions() ) ) ? '5' : '4'; ?>">&nbsp;</span>
 			</p>
-		</div><!-- .tr -->
+		</div> --><!-- .tr -->
 
 	</li>
 
