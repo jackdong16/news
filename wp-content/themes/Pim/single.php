@@ -26,23 +26,27 @@ if (have_posts()) : while (have_posts()) : the_post();
 <!--Title-->
 <div class="row-fluid">
 	<div class="span9">
-		<h2><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
-	</div>
-</div>
+		<div id="post_title"><?php the_title(); ?></div>
 
-<!--Post Details-->
-<div class="row-fluid">
-	<div class="span9">
-		<div class="post_detail">
-			Posted by:&nbsp;<?php the_author_posts_link(); ?>&nbsp;&nbsp;&nbsp;
+		<div id="post_detail">
+			<!-- Posted by:&nbsp;<?php the_author_posts_link(); ?>&nbsp;&nbsp;&nbsp;
 			Tags:&nbsp;
 			<?php the_tags(''); ?>&nbsp;&nbsp;&nbsp;
-			Posted date:&nbsp;
-			<?php the_time('F j, Y'); ?> <?php edit_post_link('edit post', ', ', ''); ?>
+			Posted date:&nbsp; -->
+			<?php the_time('Y/m/d g:i A'); ?> <?php edit_post_link('edit post', ', ', ''); ?>
 			&nbsp;|&nbsp;
 			<?php comments_number('No comment', 'Comment', '% Comments'); ?>
 		</div>
+
+		<?php echo the_content(); ?>
 	</div>
+
+	<div class="span3">
+		<ul class="sidebar_widget">
+			<?php dynamic_sidebar('PostPage_Sidebar'); ?>
+		</ul>
+	</div>
+
 </div>
 
 <!--Post Img-
@@ -58,23 +62,11 @@ if (have_posts()) : while (have_posts()) : the_post();
 	</div>
 </div>-->
 
-<!--Content-->
-<div class="row-fluid">
-	<div class="span9">
-		<?php echo the_content(); ?>
-	</div>
-	<div class="span3">
-		<ul class="sidebar_widget">
-			<?php dynamic_sidebar('Blog Sidebar'); ?>
-		</ul>
-	</div>
-</div>
-
 <!--Social Media-->
 <div class="row-fluid">
 	<div class="span9">
 		<ul class="social_media">
-			<h5>Share This</h5>
+			<h5>分享</h5>
 			<hr/>
 			<li>
 				<a href="http://twitter.com/home?status=<?=the_title()?> <?=the_permalink()?>" title="Retweet">

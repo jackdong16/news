@@ -51,9 +51,16 @@ if (have_posts()) : while (have_posts()) : the_post();
 							</div>
 							<br class="clear"/><br/>
 							
-							<div class="post_img">
-								<img src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/timthumb.php?src=<?php echo $image_thumb; ?>&h=300&w=600&zc=1" alt="" />
-							</div>
+							<?php if($image_thumb){ ?>
+								<div class="post_img">
+									<?php $thumb = theme_thumb($image_thumb, 60, 60, 'c');?>
+									<img class="thumbnail" src="<?php echo $thumb ?>">
+									<img src="<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/timthumb.php?src=<?php echo $image_thumb; ?>&h=300&w=600&zc=1" alt="" />
+								</div>
+
+							<?php 
+							}
+							?>
 							
 							<br class="clear"/>
 							

@@ -28,14 +28,20 @@ include (TEMPLATEPATH . "/lib/custom.lib.php");
 //Get custom shortcode
 include (TEMPLATEPATH . "/lib/shortcode.lib.php");
 
-// Register Custom Navigation Walker
-require_once('twitter_bootstrap_nav_walker.php');
-
 /**
 *	Setup Menu
 **/
 include (TEMPLATEPATH . "/lib/menu.lib.php");
 
+// Register Custom Navigation Walker
+require_once('twitter_bootstrap_nav_walker.php');
+
+// Register Custom Thumbnail Resizer
+require_once('vendor/resize/mr_resize.php');
+
+function theme_thumb($url, $width, $height=0, $align='') {
+  return mr_image_resize($url, $width, $height, true, $align, false);
+}
 
 function filter_rss_query($query) {
 	if ( $query->is_feed ) {
@@ -43,7 +49,22 @@ function filter_rss_query($query) {
 	}
 	return $query;
 }
+
+function ip_to_address($ip){
+	$response = file_get_contents(
+	  'http://api.hostip.info/get_json.php?ip='.$ip
+	);
+	$response = json_decode( $response );
+ 	return ucwords(strtolower($response->city));
+}
+
 add_filter('pre_get_posts', 'filter_rss_query');
+
+if ( function_exists( 'add_theme_support' ) ) { 
+	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( 150, 150, true ); // default Post Thumbnail dimensions (cropped)
+	add_image_size( 'category_thumb', 300, 300, true );
+}
 
 
 /*

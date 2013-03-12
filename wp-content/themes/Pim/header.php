@@ -104,12 +104,13 @@ if(empty($pp_header_font) OR ($pp_header_font == 'Sansation_Regular-webfont'))
 <!-- Jquery and plugins -->
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery-ui-1.10.1.custom.min.js"></script>
+<!--<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.mobile-1.3.0.min.js"></script>-->
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/fancybox/jquery.fancybox-1.3.0.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.validate.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/hint.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.tipsy.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/browser.js"></script>
-<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/custom.js"></script>
+<!--<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/custom.js"></script>-->
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/app.js"></script>
 </head>
@@ -151,106 +152,112 @@ if(isset($_GET['s']))
 
 	<div class="navbar">
 	    <div class="navbar-inner">
-	    <div class="container-fluid">
+		    <div class="container-fluid">
+		    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+		  	    </a>
 
-			<?php 	
-			    wp_nav_menu( 
-			        	array( 
-			        		'menu_id'			=> 'top_menu',
-			        		'menu_class'		=> 'nav',
-			        		'theme_location' 	=> 'top-menu',
-			        	) 
-			    ); 
-			?>
+		  	    <div class="nav-collapse collapse">
+					<?php 	
+					    wp_nav_menu( 
+					        	array( 
+					        		'menu_id'			=> 'top_menu',
+					        		'menu_class'		=> 'nav',
+					        		'theme_location' 	=> 'top-menu',
+					        	) 
+					    ); 
+					?>
 
-			<form class="navbar-search pull-right">
-		    	<input type="text" class="input-small search-query" placeholder="搜索">
-		    </form>
+					<form class="navbar-search pull-right">
+				    	<input type="text" class="input-small search-query" placeholder="搜索">
+				    </form>
 
-			<ul class="nav pull-right">
-				<li>
-					<a href="<?php bloginfo('rss2_url'); ?>">
-						<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_rss.png" alt="RSS"/>
-					</a>
-				</li>
-				<?php
-					//Twitter
-					$pp_twitter_url = get_option('pp_twitter_url');
-					if(!empty($pp_twitter_url))
-					{
-				?>
-				
-				<li>
-					<a href="<?php echo $pp_twitter_url; ?>">
-						<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_twitter.png" alt="Twitter"/>
-					</a>
-				</li>
-				
-				<?php
-					}
-				?>
-				
-				<?php
-					//Facebook
-					$pp_facebook_url = get_option('pp_facebook_url');
-					if(!empty($pp_facebook_url))
-					{
-				?>
-				
-				<li>
-					<a href="<?php echo $pp_facebook_url; ?>">
-						<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_facebook.png" alt="Facebook"/>
-					</a>
-				</li>
-				
-				<?php
-					}
-				?>
+					<ul class="nav pull-right">
+						<li>
+							<a href="<?php bloginfo('rss2_url'); ?>">
+								<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_rss.png" alt="RSS"/>
+							</a>
+						</li>
+						<?php
+							//Twitter
+							$pp_twitter_url = get_option('pp_twitter_url');
+							if(!empty($pp_twitter_url))
+							{
+						?>
+						
+						<li>
+							<a href="<?php echo $pp_twitter_url; ?>">
+								<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_twitter.png" alt="Twitter"/>
+							</a>
+						</li>
+						
+						<?php
+							}
+						?>
+						
+						<?php
+							//Facebook
+							$pp_facebook_url = get_option('pp_facebook_url');
+							if(!empty($pp_facebook_url))
+							{
+						?>
+						
+						<li>
+							<a href="<?php echo $pp_facebook_url; ?>">
+								<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_facebook.png" alt="Facebook"/>
+							</a>
+						</li>
+						
+						<?php
+							}
+						?>
 
-				<li><?php wp_loginout(); ?></li>
-                <li><?php wp_register(' ' , ' '); ?></li>
-                <!-- <li><a href="wp-login.php" class="simplemodal-login">Log In</a></li>
-                <li><a href="wp-login.php?action=register" class="simplemodal-register">Register</a></li> -->
-                
-			</ul>
-			    </div>
+						<li><?php wp_loginout(); ?></li>
+		                <li><?php wp_register(' ' , ' '); ?></li>
+		                <!-- <li><a href="wp-login.php" class="simplemodal-login">Log In</a></li>
+		                <li><a href="wp-login.php?action=register" class="simplemodal-register">Register</a></li> -->
+		                
+					</ul>
+				</div>
+			</div>
 		    
 	    </div>
     </div>
 <div class="main container-fluid">
 	<div class="row-fluid">
-		<div class="span9">
-				<a class="brand" href="<?php bloginfo( 'url' ); ?>">
-		    	<?php
-					//get custom logo
-					$pp_logo = get_option('pp_logo');
-					
-					if(empty($pp_logo))
-					{	
-						if($pp_skin != 'black')
-						{
-							//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_black.png';
-						}
-						else
-						{
-							//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_white.png';
-						}
+		<div class="span3">
+			<a class="brand" href="<?php bloginfo( 'url' ); ?>">
+	    	<?php
+				//get custom logo
+				$pp_logo = get_option('pp_logo');
+				
+				if(empty($pp_logo))
+				{	
+					if($pp_skin != 'black')
+					{
+						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_black.png';
 					}
-				?>
-				<h2><?php bloginfo('name'); ?></h2>
-				<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a></a>
-	            <?php 	
-					// wp_nav_menu( 
-					// 	array( 
-					// 		'menu_id'			=> 'main_nav',
-				 //        	'menu_class'		=> 'nav',
-					// 		'theme_location' 	=> 'primary-menu',
-					// 	) 
-					// );
-				?>
-					<!-- <div class="navbar">
-	    <div class="navbar-inner"> -->
-	    	<div id="m_nav">
+					else
+					{
+						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_white.png';
+					}
+				}
+			?>
+			<h1 id="webname"><?php bloginfo('name'); ?></h1></a>
+			<!--<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a>-->
+		</div>
+
+		<div class="span9">
+			<img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
+			<img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
+		</div>
+	</div>
+
+	<div class="row-fluid"> 
+		<div class="span9">
+			<div id="navbar">
 				<?php 
 				    wp_nav_menu( array(
 				        'menu'       => 'main_nav',
@@ -264,16 +271,4 @@ if(isset($_GET['s']))
 				?>
 			</div>
 		</div>
-		</div>
-
-	<!--<div class="row-fluid">
-		<div class="span4">
-			<span class="ad"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/jiaheng.gif"></span>
-		</div>
-		<div class="span4">
-			<span class="ad"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/jiaheng.gif"></span>
-		</div>
-		<div class="span4">
-			<span class="ad"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/jiaheng.gif"></span>
-		</div>
-	</div>-->
+	</div>

@@ -3,13 +3,13 @@
 *	Setup Home left column side bar
 **/
 if ( function_exists('register_sidebar') )
-    register_sidebar(array('name' => 'Home Left Sidebar'));
+    register_sidebar(array('name' => 'HP_Top_Left_Sidebar'));
     
 /**
 *	Setup Home right column side bar
 **/
 if ( function_exists('register_sidebar') )
-    register_sidebar(array('name' => 'Home Right Sidebar'));
+    register_sidebar(array('name' => 'HP_Top_Right_Sidebar'));
     
 /**
 *	Setup Home center column side bar
@@ -18,10 +18,13 @@ if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'Home Center Sidebar'));
 
 if ( function_exists('register_sidebar') )
-    register_sidebar(array('name' => 'Home Bottom Left Sidebar'));
+    register_sidebar(array('name' => 'HP_2ndLayer_Left_Widget'));
 
 if ( function_exists('register_sidebar') )
-    register_sidebar(array('name' => 'Home Bottom Center Sidebar'));
+    register_sidebar(array('name' => 'HP_2ndLayer_Middle_Widget'));
+
+if ( function_exists('register_sidebar') )
+    register_sidebar(array('name' => 'HP_2ndLayer_Right_Widget'));
 
 if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'Forum Login Sidebar'));
@@ -39,10 +42,10 @@ if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'Contact Sidebar'));
     
     
-/*	Setup Blog side bar
+/*	Setup PostPage side bar
 **/
 if ( function_exists('register_sidebar') )
-    register_sidebar(array('name' => 'Blog Sidebar'));
+    register_sidebar(array('name' => 'PostPage_Sidebar'));
     
     
 /*	Setup Footer side bar

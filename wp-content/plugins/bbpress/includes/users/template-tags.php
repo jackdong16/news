@@ -534,8 +534,8 @@ function bbp_author_ip( $args = '' ) {
 		// Default arguments
 		$defaults = array(
 			'post_id' => 0,
-			'before'  => '<span class="bbp-author-ip">(',
-			'after'   => ')</span>'
+			'before'  => '<span class="bbp-author-ip">',
+			'after'   => '</span>'
 		);
 
 		$r = bbp_parse_args( $args, $defaults, 'get_author_ip' );
@@ -548,6 +548,12 @@ function bbp_author_ip( $args = '' ) {
 		// Get the author IP meta value
 		$author_ip = get_post_meta( $post_id, '_bbp_author_ip', true );
 		if ( !empty( $author_ip ) ) {
+			$author_ip = ip_to_address($author_ip);
+
+			// if($author_ip.equals("private address")){
+			// 	$author_ip = " "; //empty if 127.0.0.1
+			// }
+
 			$author_ip = $before . $author_ip . $after;
 
 		// No IP address

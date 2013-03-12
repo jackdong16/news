@@ -99,7 +99,7 @@ $.fn.setNav = function(){
 
 $(document).ready(function(){ 
 
-	$(document).setNav();
+	//$(document).setNav();
 	
 	$('input[title!=""]').hint();
 	

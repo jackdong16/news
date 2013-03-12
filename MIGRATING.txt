@@ -1,0 +1,5 @@
+- Copy all files
+- Export and import all DB tables
+- Change WP_options to match DB and host
+- (If URL Change)
+	Use http://interconnectit.com/products/search-and-replace-for-wordpress-databases/ to change values in db 

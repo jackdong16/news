@@ -48,7 +48,7 @@
 
 			<?php do_action( 'bbp_theme_before_reply_author_admin_details' ); ?>
 
-			<div class="bbp-reply-ip"><?php bbp_author_ip( bbp_get_reply_id() ); ?></div>
+			<div class="bbp-reply-ip"><?php bbp_author_ip( bbp_get_reply_id()); ?></div>
 
 			<?php do_action( 'bbp_theme_after_reply_author_admin_details' ); ?>
 

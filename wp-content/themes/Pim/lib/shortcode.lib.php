@@ -383,15 +383,30 @@ function recent_posts_func($atts) {
 add_shortcode('recent_posts', 'recent_posts_func');
 
 
+function mini_recent_posts_func($atts) {
+	
+	//extract short code attr
+	extract(shortcode_atts(array(
+		'items' => 20,
+	), $atts));
+
+	$return_html = peerapong_posts('recent', $items, FALSE, TRUE); //Mini option = true
+	
+	return $return_html;
+}
+add_shortcode('mini_recent_posts', 'mini_recent_posts_func');
+
+
 
 function popular_posts_func($atts) {
 
 	//extract short code attr
 	extract(shortcode_atts(array(
 		'items' => 5,
+		'truncate' => 35,
 	), $atts));
 
-	$return_html = peerapong_posts('poopular', $items, FALSE);
+	$return_html = peerapong_posts('poopular', $items, FALSE, FALSE, $truncate); //Truncate #
 	
 	return $return_html;
 }
@@ -404,9 +419,10 @@ function cat_posts_func($atts, $content) {
 	extract(shortcode_atts(array(
 		'cat_id' => '',
 		'items' => 5,
+		'truncate' => 35,
 	), $atts));
 
-	$return_html = peerapong_cat_posts($cat_id, $items, FALSE);
+	$return_html = peerapong_cat_posts($cat_id, $items, FALSE, $truncate); //Truncate #
 	
 	return $return_html;
 }

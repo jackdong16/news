@@ -261,6 +261,18 @@ Reply', 'login_text' => 'Log in to reply to this', 'max_depth' => $args['max_dep
 <?php
 }
 
+function cn_ago($timestamp){
+   $difference = time() - $timestamp;
+   $periods = array("秒", "分钟", "小时", "天", "星期", "月", "年", "十年");
+   $lengths = array("60","60","24","7","4.35","12","10");
+   for($j = 0; $difference >= $lengths[$j]; $j++)
+   $difference /= $lengths[$j];
+   $difference = round($difference);
+   //if($difference != 1) $periods[$j].= "s";
+   $text = "$difference$periods[$j]";
+   return $text;
+}
+
 function peerapong_ago($timestamp){
    $difference = time() - $timestamp;
    $periods = array("second", "minute", "hour", "day", "week", "month", "years", "decade");
@@ -271,6 +283,35 @@ function peerapong_ago($timestamp){
    if($difference != 1) $periods[$j].= "s";
    $text = "$difference $periods[$j] ago";
    return $text;
+}
+
+function cn_substr($str, $maxLength){
+  $sub = '';
+  $len = 0;
+  $dotdot = false;
+
+  preg_match_all('/./u', $str, $matches);
+  
+  foreach ($matches[0] as $word) //English letters and Chinese words
+  {
+    //echo '<'.$word.'>';
+
+    if($len <= $maxLength){
+      $sub .= $word;
+      if(mb_strlen($word) == 1) //If it's a Chinese word, increment by 1
+        $len += 1;
+      elseif(mb_strlen($word) > 1) //If it's a English letter, increment by half. Since usually a Enghlish Character is half the size of a Chinese word.
+        $len += 0.5;
+      else{} //If it's a space, do nothing. 
+    }
+    else{
+      $dotdot = true; //If we need to break out of this loop, it means the string length has exceded maxlength, we should put ...
+    }
+    
+  }
+  //echo "<br>";
+  return $sub . (($dotdot) ? '...' : '');
+
 }
 
 
@@ -302,9 +343,11 @@ function peerapong_substr($str, $length, $minword = 3)
 /**
 *	Setup recent posts widget
 **/
-function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE) 
+function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FALSE, $truncate = 35) 
 {
-	$pp_blog_cat = get_option('pp_blog_cat'); 
+	$topNum = 1; //Highlight the top x articles
+
+  $pp_blog_cat = get_option('pp_blog_cat'); 
 	$return_html = '';
 	
 	if($sort == 'recent')
@@ -328,16 +371,38 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE)
 
 			foreach($posts as $post)
 			{
-				$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
-				$return_html.= '<li><div><a href="'.get_permalink($post->ID).'"><img onerror="imgError(this);" class="thumbnail" src="'.get_bloginfo( 'stylesheet_directory' ).'/timthumb.php?src='.$image_thumb.'&amp;h=60&amp;w=60&amp;zc=1" alt="" /></a></div>';
-        $return_html.= '<div><a href="'.get_permalink($post->ID).'">'.peerapong_substr($post->post_title, 50).'</a>';
-				$return_html.= '<span><a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a></span><div>'.date('F j', strtotime($post->post_date)).'</div>';
-				$return_html.= '<div class="post_content">'.peerapong_substr(strip_tags(strip_shortcodes($post->post_content)), 80).'</div></div></li>';
+        if($mini){
+          $return_html.= '<li><div>';
+          $return_html.= '<div><span class="bold title"><a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a></span>';
+          $return_html.= '<span class="ago"> '. cn_ago(strtotime($post->post_date)) .'</span></div>';
+          $return_html.= '</div></li>';
+        }
+        else{
+          if($topNum > 0){
+            $return_html.= '<li class="top">';
 
+            $image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+            $thumb = theme_thumb($image_thumb[0], 60, 60, 'c'); // Crops from center
+         
+            if($image_thumb){
+              $return_html.= '<div><a href="'.get_permalink($post->ID).'"><img class="thumbnail" src="'. $thumb.'"></a></div>';
+            }
+            $return_html.= '<div><a class="top title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
+            $return_html.= '<a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a>';//.date('n月j日', strtotime($post->post_date)).'</div>';
+            $return_html.= '<div class="post_content">'.cn_substr(strip_tags(strip_shortcodes($post->post_content)), $truncate).'</div></div>';
+          }
+          else{
+            $return_html.= '<li class="bullet">';
+            $return_html.= '<div><a class="title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';   
+          }
+
+          $return_html.= '</li>';
+        }
+        $topNum--;
 			}	
 
 		$return_html.= '</ul>';
-
+    //$return_html.= '更多...'; 
 	}
 	
 	if($echo)
@@ -350,8 +415,9 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE)
 	}
 }
 
-function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE) 
+function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE, $truncate = 35) 
 {
+  $topNum = 1;
 	$return_html = '';
 	$posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&category='.$cat_id);
 	$title = get_cat_name($cat_id);
@@ -362,14 +428,39 @@ function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE)
 		$return_html.= '<h4 class="widgettitle">'.$title.'</h4>';
 		$return_html.= '<ul class="posts">';
 
-			foreach($posts as $post)
-			{
-				$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
-				$return_html.= '<li><img src="'.get_bloginfo( 'stylesheet_directory' ).'/timthumb.php?src='.$image_thumb.'&amp;h=60&amp;w=60&amp;zc=1" alt="" /> <a href="'.get_permalink($post->ID).'">';
-				$return_html.= '<h6>'.peerapong_substr($post->post_title, 50).'</h6></a><a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a>'.date('F j, Y', strtotime($post->post_date)).'<br/><br/>';
-				$return_html.= peerapong_substr(strip_tags(strip_shortcodes($post->post_content)), 80).'</li>';
+      foreach($posts as $post)
+      {
+        if($mini){
+          $return_html.= '<li><div>';
+            $return_html.= '<div><span class="ago">'. cn_ago(strtotime($post->post_date)) .' - </span>';
+            $return_html.= '<span class="title"><a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a></span></div>';
+            $return_html.= '';
+          $return_html.= '</div></li>';
+        }
+        else{
+          if($topNum > 0){
+            $return_html.= '<li class="top">';
 
-			}	
+            $image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+            //$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
+            $thumb = theme_thumb($image_thumb[0], 60, 60, 'c'); // Crops from center
+         
+            if($image_thumb){
+              $return_html.= '<div><a href="'.get_permalink($post->ID).'"><img class="thumbnail" src="'. $thumb.'"></a></div>';
+            }
+            $return_html.= '<div><a class="top title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
+            $return_html.= '<a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a>';//.date('n月j日', strtotime($post->post_date)).'</div>';
+            $return_html.= '<div class="post_content">'.cn_substr(strip_tags(strip_shortcodes($post->post_content)), $truncate).'</div></div>';
+          }
+          else{
+            $return_html.= '<li class="bullet">';
+            $return_html.= '<div><a class="title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';   
+          }
+
+          $return_html.= '</li>';
+        }
+        $topNum--;
+      } 
 
 		$return_html.= '</ul>';
 
@@ -435,7 +526,16 @@ function peerapong_recent_comments($items = 5, $echo = TRUE)
 function peerapong_photos_in_news($items = 10, $echo = TRUE) 
 {
 	$return_html = '';
-	$posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date');
+    
+  $args = array( 
+    'numberposts' => $items, 
+    'orderby' => 'date', 
+    'order' => 'DESC',
+    'meta_key' => '_thumbnail_id'
+  );
+
+  $posts = get_posts( $args );
+
 	$title = 'Photo in news';
 	
 	if(!empty($posts))
@@ -446,9 +546,10 @@ function peerapong_photos_in_news($items = 10, $echo = TRUE)
 
 			foreach($posts as $post)
 			{
-				$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
-        if ($image_thumb)
- 				 $return_html.= '<li><a href="'.get_permalink($post->ID).'" title="'.$post->post_title.'"><img class="resize" src="'.get_bloginfo( 'stylesheet_directory' ).'/timthumb.php?src='.$image_thumb.'&amp;h=60&amp;w=60&amp;zc=1" alt="" /></a></li>';
+        $image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );  
+				$thumb = theme_thumb($image_thumb[0], 60, 60, 'c'); // Crops from center
+        //if ($image_thumb)
+ 				 $return_html.= '<li><a href="'.get_permalink($post->ID).'" title="'.$post->post_title.'"><img class="resize" src="'. $thumb.'"></a></li>';
 
 			}	
 

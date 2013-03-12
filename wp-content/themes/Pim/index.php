@@ -15,7 +15,14 @@ if(empty($pp_featured_items))
 	$pp_featured_items = 5;
 }
 
-$featured_posts_arr = get_posts('numberposts='.$pp_featured_items.'&order=DESC&orderby=date&category='.$pp_featured_cat);
+$args = array( 
+  'numberposts' => $items, 
+  'orderby' => 'date', 
+  'order' => 'DESC',
+  'meta_key' => '_thumbnail_id'
+);
+
+$featured_posts_arr = get_posts( $args );
 
 get_header(); 
 

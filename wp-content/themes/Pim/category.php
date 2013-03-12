@@ -9,28 +9,45 @@
 get_header(); 
 
 ?>
+	<div id="category">
+	<div class="row-fluid">
+		<?php peerapong_breadcrumbs(); ?>
+		<ul class="thumbnails">
 
-<div class="row-fluid">
-	<div class="span9">
-		<?php peerapong_breadcrumbs(); ?><br/>
-			
 		<?php
-
 		if (have_posts()) : while (have_posts()) : the_post();
 
-			$image_thumb = get_post_meta(get_the_ID(), 'blog_thumb_image_url', true);
-		?>
-						
-						
-			<!-- Begin each blog post -->
-			<div class="post_wrapper">
-				<div class="post_header">
-					<h2 class="cufon">
-						<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+
+			$image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );	
+			$thumb = theme_thumb($image_thumb[0], 200, 200, 'c'); // Crops from center
+			if ( has_post_thumbnail() ) {
+			?>
+	      	
+			  <li class="span3">
+			    <div class="thumbnail">
+			      <img class="thumbnail" src="<?php echo $thumb ?>">
+	              <div class="caption">
+	                <h4>
+	                	<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 							<?php the_title(); ?>									
 						</a>&nbsp;
 						<a href="<?php echo gen_permalink(get_permalink(), 'quick_view=1'); ?>" class="quick_view"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a>
-					</h2>
+					</h4>
+	                <p class="content"><?php echo cn_substr(get_the_content_with_formatting(), 50); ?></p>
+	                <!-- <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p> -->
+	              </div>
+	            </div>
+			  </li>
+			
+					<?php 
+					}
+					?>
+						
+			<!-- Begin each blog post -->
+			<!-- <div class="post_wrapper">
+				<div class="post_header">
+					<h2 class="cufon">
+						</h2>
 					<div class="post_detail">
 						Posted by:&nbsp;<?php the_author_posts_link(); ?>&nbsp;&nbsp;&nbsp;
 						Tags:&nbsp;
@@ -49,21 +66,23 @@ get_header();
 				
 				<br class="clear"/>
 				
-				<?php echo get_the_content_with_formatting(); ?>
+				
 
 				<hr>
 				
-			</div>
-			<!-- End each blog post -->
+			</div> -->
 		<?php endwhile; endif; ?>
 
-		<div class="pagination"><p><?php posts_nav_link(' '); ?></p></div>
-	</div>
-	<div class="span3">
-		<ul class="sidebar_widget">
-			<?php dynamic_sidebar('Blog Sidebar'); ?>
 		</ul>
+
+		<div class="pagination"><p><?php posts_nav_link(' '); ?></p></div>
+
+		<div class="span3">
+			<ul class="sidebar_widget">
+				<?php dynamic_sidebar('Blog Sidebar'); ?>
+			</ul>
+		</div>
 	</div>
-</div>				
+</div>
 
 <?php get_footer(); ?>
