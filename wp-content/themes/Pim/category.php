@@ -9,7 +9,7 @@
 get_header(); 
 
 ?>
-	<div id="category">
+<div id="category">
 	<div class="row-fluid">
 		<?php peerapong_breadcrumbs(); ?>
 		<ul class="thumbnails">
@@ -24,13 +24,13 @@ get_header();
 			?>
 	      	
 			  <li class="span3">
-			    <div class="thumbnail">
+			    <div class="thumbnail clickable">
+			    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"></a>
 			      <img class="thumbnail" src="<?php echo $thumb ?>">
 	              <div class="caption">
 	                <h4>
-	                	<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+	                	
 							<?php the_title(); ?>									
-						</a>&nbsp;
 						<a href="<?php echo gen_permalink(get_permalink(), 'quick_view=1'); ?>" class="quick_view"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a>
 					</h4>
 	                <p class="content"><?php echo cn_substr(get_the_content_with_formatting(), 50); ?></p>

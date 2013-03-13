@@ -121,8 +121,6 @@ ul.thumbnails li.span12 + li {
   margin-left : 0px;
 }
 
-
-
 .top-bar{
 	max-width: 960px;
 	margin: 0 auto;
@@ -219,11 +217,24 @@ ul.thumbnails li.span12 + li {
 	font-weight: bold;
 }
 
-/*
-#homepageTab{
-	margin-bottom: 8px;
-	padding: 0;
-}*/
+#search .thumbnail:hover, #category .thumbnail:hover{ border-color:rgba(82, 168, 236, 0.8);outline:0;outline:thin dotted \9;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);}
+
+div.clickable{
+	position: relative;
+}
+
+div.clickable a {
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    text-decoration:none; /* Makes sure the link   doesn't get underlined */
+    z-index:10; /* raises anchor tag above everything else in div */
+    background-color:white; /*workaround to make clickable in IE */
+    opacity: 0; /*workaround to make clickable in IE */
+    filter: alpha(opacity=1); /*workaround to make clickable in IE */
+}
 
 #homepage_popular .widgettitle{
 	display: none;
@@ -240,14 +251,21 @@ ul.thumbnails li.span12 + li {
 }
 
 #homepage_recent .title{
-	overflow: hidden;
+	height: 22px;
+	display:block;
 	text-overflow: ellipsis;
-	width: 100%;
+	-o-text-overflow: ellipsis;
+	-ms-text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 85%;
+	float: left;
 }
 
 #homepage_recent .ago{
 	font-size: 10px;
 	color: gray;
+	width: 20%;
 }
 
 .homepage_category .bullet, .homepage_popular .bullet{
@@ -265,6 +283,22 @@ ul.thumbnails li.span12 + li {
 	border: 0 none;
 	padding: 0;
 	padding-top: 3px;
+}
+
+#search img.thumbnail{
+	float: left;
+}
+
+#search .caption{
+	padding: 0 5px 5px;
+	margin-left: 70px;
+}
+
+#search .caption h4{
+	margin: 0;
+}
+
+#search .post_content{
 }
 
 /**** BBPress Forum ****/
@@ -430,10 +464,6 @@ ul.thumbnails li.span12 + li {
 .posts li, .sidebar .content .sidebar_widget li ul.posts li
 {
 	padding: 0 0 5px 0;
-}
-
-.posts .top{
-	/*border-bottom: 1px solid gray;*/
 }
 
 

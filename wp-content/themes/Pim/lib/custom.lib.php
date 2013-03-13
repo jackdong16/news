@@ -373,8 +373,8 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
 			{
         if($mini){
           $return_html.= '<li><div>';
-          $return_html.= '<div><span class="bold title"><a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a></span>';
-          $return_html.= '<span class="ago"> '. cn_ago(strtotime($post->post_date)) .'</span></div>';
+          $return_html.= '<a class="bold title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
+          $return_html.= '<span class="ago"> '. cn_ago(strtotime($post->post_date)) .'</span>';
           $return_html.= '</div></li>';
         }
         else{

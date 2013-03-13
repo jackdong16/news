@@ -171,7 +171,7 @@ if(isset($_GET['s']))
 					?>
 
 					<form class="navbar-search pull-right">
-				    	<input type="text" class="input-small search-query" placeholder="搜索">
+				    	<?php get_search_form(true); ?>
 				    </form>
 
 					<ul class="nav pull-right">
@@ -249,8 +249,13 @@ if(isset($_GET['s']))
 			<!--<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a>-->
 		</div>
 
-		<div class="span9">
+		<div class="span4">
+			
 			<img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
+			
+		</div>
+
+		<div class="span4">
 			<img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
 		</div>
 	</div>
