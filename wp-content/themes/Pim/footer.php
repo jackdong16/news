@@ -32,7 +32,7 @@
 			?>
 	      <!-- </div> -->
 	    </footer>
-	    </div>
+    </div>
 <?php
 		/**
     	*	Setup Google Analyric Code

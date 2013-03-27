@@ -26,6 +26,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 <!--Title-->
 <div class="row-fluid">
 	<div class="span9">
+		<?php if(function_exists('up_down_post_votes')) { $return_html.= up_down_post_votes( $post->ID ); }?>
 		<div id="post_title"><?php the_title(); ?></div>
 
 		<div id="post_detail">
@@ -42,7 +43,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	</div>
 
 	<div class="span3">
-		<ul class="sidebar_widget">
+		<ul class="widget">
 			<?php dynamic_sidebar('PostPage_Sidebar'); ?>
 		</ul>
 	</div>
@@ -65,7 +66,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 <!--Social Media-->
 <div class="row-fluid">
 	<div class="span9">
-		<ul class="social_media">
+		<ul id="share" class="social_media">
 			<h5>分享</h5>
 			<hr/>
 			<li>

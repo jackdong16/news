@@ -428,6 +428,21 @@ function cat_posts_func($atts, $content) {
 }
 add_shortcode('cat_posts', 'cat_posts_func');
 
+function ranking_func($atts, $content) {
+
+	//extract short code attr
+	extract(shortcode_atts(array(
+		'cat_id' => '', //this is the cat id when user submits a post
+		'type' => 'popular',
+		'items' => 5,
+	), $atts));
+
+	$return_html = ranking($cat_id, $items, FALSE, $type); //Truncate #
+	
+	return $return_html;
+}
+add_shortcode('ranking', 'ranking_func');
+
 
 function recent_comments_func($atts, $content) {
 

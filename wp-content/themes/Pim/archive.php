@@ -85,7 +85,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 							
 							<div class="content">
 							
-								<ul class="sidebar_widget">
+								<ul class="widget">
 									<?php dynamic_sidebar('Blog Sidebar'); ?>
 								</ul>
 								

@@ -14,21 +14,18 @@ if ( function_exists('register_sidebar') )
 /**
 *	Setup Home center column side bar
 **/
-if ( function_exists('register_sidebar') )
+if ( function_exists('register_sidebar') ){
     register_sidebar(array('name' => 'Home Center Sidebar'));
-
-if ( function_exists('register_sidebar') )
+    register_sidebar(array('name' => 'Popular Rank Widget'));
+    register_sidebar(array('name' => 'Latest Rank Widget'));
+    
     register_sidebar(array('name' => 'HP_2ndLayer_Left_Widget'));
-
-if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'HP_2ndLayer_Middle_Widget'));
-
-if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'HP_2ndLayer_Right_Widget'));
-
-if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'Forum Login Sidebar'));
-
+}
+    
+    
 /**
 *	Setup Page side bar
 **/

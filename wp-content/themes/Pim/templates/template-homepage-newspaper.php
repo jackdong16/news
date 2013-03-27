@@ -1,8 +1,6 @@
 <div class="row-fluid">
-	<div class="span3">
-		<ul class="sidebar_widget narrow_thumbnail">
-			<?php dynamic_sidebar('HP_Top_Left_Sidebar'); ?>
-		</ul>
+	<div class="narrow_thumbnail fixed_height span3">
+		<?php dynamic_sidebar('HP_Top_Left_Sidebar'); ?>
 	</div>
 	<div class="span6">
 		<?php
@@ -51,61 +49,48 @@
 		<?php
 			}
 		?>
-		
+		<div id="homepage_new_post">
+			<a href="javascript:;" rel="165" class="btn btn-primary btn-large postpopup" data-loading-text="等一下..">
+				分享吧！
+	    	</a>
+		</div>
 	</div>
-	<div class="span3">
-		<ul class="sidebar_widget">
-			<?php dynamic_sidebar('HP_Top_Right_Sidebar'); ?>
-		</ul>
+	<div class="fixed_height span3">
+		<?php dynamic_sidebar('HP_Top_Right_Sidebar'); ?>
 	</div>
 </div>
 
 <hr>
 
 <div class="row-fluid">
-	<div class="span4">
-		<ul class="sidebar_widget">
-			<?php dynamic_sidebar('HP_2ndLayer_Left_Widget'); ?>
-		</ul>
-	</div>
-
-	<div class="span4">
-		<ul class="sidebar_widget">
-			<?php dynamic_sidebar('HP_2ndLayer_Middle_Widget'); ?>
-		</ul>
-	</div>
-
-<!-- 	<div class="span4">
-
-	    <ul class="nav nav-tabs" id="homepageTab">
-	    <li><a href="#popular" data-toggle="tab">今日头条</a></li>
-	    <!-- <li><a href="#housing" data-toggle="tab">家居温哥华</a></li> 
-	    <li><a href="#eat" data-toggle="tab">去哪吃</a></li>
-	    <li><a href="#play" data-toggle="tab">去哪玩</a></li>
-	    </ul>
-
-	    <div id="homepage_popular">
-		    <div class="tab-content wide_thumbail">
-				<div class="tab-pane active" id="popular"><ul class="sidebar_widget"><?php dynamic_sidebar('Home Center Sidebar'); ?></ul></div>
-				<div class="tab-pane" id="housing"><?php dynamic_sidebar('Home Center Sidebar'); ?></div>
-				<div class="tab-pane" id="eat"><?php dynamic_sidebar('Home Center Sidebar'); ?></div>
-				<div class="tab-pane" id="play"><?php dynamic_sidebar('Home Center Sidebar'); ?></div>
-			</div>
+	<div class="span8">
+		<div class="tabbable"> <!-- Only required for left/right tabs -->
+		  <ul class="nav nav-tabs">
+		    <!--<li class="active"><a href="#popular" data-toggle="tab">最火热</a></li>-->
+		    <li><a href="#latest" data-toggle="tab">最新</a></li>
+		  </ul>
+		  <div class="tab-content">
+		    <div class="tab-pane" id="popular">
+				<?php dynamic_sidebar('Popular Rank Widget'); ?>
+		    </div>
+		    <div class="tab-pane active" id="latest">
+		      	<?php dynamic_sidebar('Latest Rank Widget'); ?>
+		    </div>
+		  </div>
 		</div>
+	</div>
+</div>
 
-
-	    <script>
-			$(function () {
-				$('#homepageTab a[href="#popular"]').tab('show'); 
-			// $('#myTab a:first').tab('show');
-			})
-		</script>
-
-	</div> -->
+<div class="row-fluid">
+	<div class="span4">
+		<?php dynamic_sidebar('HP_2ndLayer_Left_Widget'); ?>	
+	</div>
 
 	<div class="span4">
-		<ul class="sidebar_widget">
-			<?php dynamic_sidebar('HP_2ndLayer_Right_Widget'); ?>
-		</ul>
+		<?php dynamic_sidebar('HP_2ndLayer_Middle_Widget'); ?>
+	</div>
+
+	<div class="span4">
+		<?php dynamic_sidebar('HP_2ndLayer_Right_Widget'); ?>
 	</div>
 </div>

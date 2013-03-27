@@ -66,7 +66,6 @@ if ( function_exists( 'add_theme_support' ) ) {
 	add_image_size( 'category_thumb', 300, 300, true );
 }
 
-
 /*
 	Begin creating admin optinos
 */

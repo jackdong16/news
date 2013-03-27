@@ -6,6 +6,9 @@
  * @subpackage Pim
  */
 
+$popular_post_length_in_days = 30; //We will attempt to pick the most popular posts within 30 days. 
+$homepage_carousel_number = 5;
+
 
 // Get featured posts
 $pp_featured_cat = get_option('pp_featured_cat');
@@ -16,7 +19,7 @@ if(empty($pp_featured_items))
 }
 
 $args = array( 
-  'numberposts' => $items, 
+  'numberposts' => $homepage_carousel_number, 
   'orderby' => 'date', 
   'order' => 'DESC',
   'meta_key' => '_thumbnail_id'

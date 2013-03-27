@@ -366,13 +366,13 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
 	if(!empty($posts))
 	{
 
-		//$return_html.= '<h4 class="widgettitle">'.$title.'</h4>';
-		$return_html.= '<ul class="posts blog">';
+		if (!$mini) $return_html.= '<h4 class="widgettitle">'.$title.'</h4>';
+		$return_html.= '<ul class="posts">';
 
 			foreach($posts as $post)
 			{
         if($mini){
-          $return_html.= '<li><div>';
+          $return_html.= '<li class="mini"><div>';
           $return_html.= '<a class="bold title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
           $return_html.= '<span class="ago"> '. cn_ago(strtotime($post->post_date)) .'</span>';
           $return_html.= '</div></li>';
@@ -426,12 +426,12 @@ function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE, $truncate =
 	{
 
 		$return_html.= '<h4 class="widgettitle">'.$title.'</h4>';
-		$return_html.= '<ul class="posts">';
+		$return_html.= '<ul class="category">';
 
       foreach($posts as $post)
       {
         if($mini){
-          $return_html.= '<li><div>';
+          $return_html.= '<li class="mini"><div>';
             $return_html.= '<div><span class="ago">'. cn_ago(strtotime($post->post_date)) .' - </span>';
             $return_html.= '<span class="title"><a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a></span></div>';
             $return_html.= '';
@@ -474,6 +474,73 @@ function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE, $truncate =
 	{
 		return $return_html;
 	}
+}
+
+function ranking($cat_id, $items = 10, $echo = TRUE, $sort = 'popular')
+{
+  $return_html = '';
+
+  //$return_html = $cat_id;
+
+  if($sort == 'recent')
+    $posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&post_status=publish&category='.$cat_id);
+  else{  //Then it's popular
+    global $wpdb;
+    
+    $posts = $wpdb->get_results("SELECT post_id, vote_count_up - vote_count_down AS difference FROM ".$wpdb->base_prefix."up_down_post_vote_totals ORDER BY difference");
+    $posts = $wpdb->get_results("SELECT comment_count, ID, post_title, post_content, post_date FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND category = ".$cat_id." ORDER BY comment_count DESC LIMIT 0 , ".$items);
+    
+  }
+  //$return_html.= print_r($posts);
+
+  if(!empty($posts))
+  {
+    // $return_html.= '<h4 class="widgettitle">'.$title.'</h4>';
+    $return_html.= '<ol class="ranking">';
+    //$return_html.= print_r($posts);
+    foreach($posts as $post)
+    {
+      $return_html.= '<li class="top">';
+
+      $image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+      $thumb = theme_thumb($image_thumb[0], 60, 60, 'c'); // Crops from center
+
+      $return_html.= '<div class="vote">';
+       //updown-vote-box updown-post" id="updown-post-'.$post_id.'" post-id="'.$post_id.'">';
+      //if(function_exists('up_down_post_votes')) { $return_html.= up_down_post_votes( $post->ID ); }
+      $return_html.= '<div class="up icon-large icon-thumbs-up"></div>';
+      //if(function_exists('up_down_post_vote_count')) { $return_html.= print_r(up_down_post_vote_count($post->ID));}
+      $return_html.= '<div class="down icon-large icon-thumbs-down"></div>';
+      $return_html.= '</div>';
+
+      if($image_thumb){
+        $return_html.= '<div><a href="'.get_permalink($post->ID).'"><img class="thumbnail" src="'. $thumb.'"></a></div>';
+      }
+      $return_html.= '<div><a class="top title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
+      $return_html.= '</div>';
+
+      $return_html.= '<div class="tagline">作者: '.get_the_author_meta('display_name', $post->post_author);
+      $return_html.= '<div class="icon icon-heart"></div>';
+      $return_html.= '<a href="'.get_permalink($post->ID).'#comments"><div class="icon icon-comments"></div></a>';
+      $return_html.= '<a href="'.get_permalink($post->ID).'#share"><div class="icon icon-share"></div></a>';;
+      $return_html.= '</div>';
+
+      $return_html.= '</li>';
+      
+    } 
+
+    $return_html.= '</ol>';
+  }
+
+  if($echo)
+  {
+    echo $return_html;
+  }
+  else
+  {
+    return $return_html;
+  }
+
 }
 
 function peerapong_recent_comments($items = 5, $echo = TRUE) 

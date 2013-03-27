@@ -78,7 +78,7 @@ get_header();
 		<div class="pagination"><p><?php posts_nav_link(' '); ?></p></div>
 
 		<div class="span3">
-			<ul class="sidebar_widget">
+			<ul class="widget">
 				<?php dynamic_sidebar('Blog Sidebar'); ?>
 			</ul>
 		</div>

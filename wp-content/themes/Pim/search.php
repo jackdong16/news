@@ -46,7 +46,7 @@ get_header();
 		</li>
 
 		<li class="span3">
-			<ul class="sidebar_widget">
+			<ul class="widget">
 				<?php //dynamic_sidebar('Blog Sidebar'); ?>
 			</ul>
 		</li>

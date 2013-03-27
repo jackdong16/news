@@ -66,6 +66,8 @@
 <!-- <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/NOscreen.css" type="text/css" media="all"/> -->
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/tipsy.css" type="text/css" media="all"/>
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/font-awesome-ie7.min.css" type="text/css">
+<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/app.css" type="text/css">
 
 
@@ -91,8 +93,8 @@ if(empty($pp_header_font) OR ($pp_header_font == 'Sansation_Regular-webfont'))
 ?>
 
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/skins/<?php echo $pp_skin; ?>.css" type="text/css" media="all"/>
-<link rel="stylesheet" type="text/css" href="<?php bloginfo( 'stylesheet_directory' ); ?>/js/fancybox/jquery.fancybox-1.3.0.css" media="screen"/>
-
+<!-- <link rel="stylesheet" type="text/css" href="<?php bloginfo( 'stylesheet_directory' ); ?>/js/fancybox/jquery.fancybox-1.3.0.css" media="screen"/>
+ -->
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/ie7.css" type="text/css" media="all"/>
 <![endif]-->
@@ -104,8 +106,9 @@ if(empty($pp_header_font) OR ($pp_header_font == 'Sansation_Regular-webfont'))
 <!-- Jquery and plugins -->
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery-ui-1.10.1.custom.min.js"></script>
-<!--<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.mobile-1.3.0.min.js"></script>-->
-<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/fancybox/jquery.fancybox-1.3.0.js"></script>
+<!--<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.mobile-1.3.0.min.js"></script>
+<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.simplemodal.1.4.4.min.js"></script>
+<script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/fancybox/jquery.fancybox-1.3.0.js"></script>-->
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.validate.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/hint.js"></script>
 <script type="text/javascript" src="<?php bloginfo( 'stylesheet_directory' ); ?>/js/jquery.tipsy.js"></script>
@@ -225,7 +228,7 @@ if(isset($_GET['s']))
 		    
 	    </div>
     </div>
-<div class="main container-fluid">
+<div id="main" class="container-fluid">
 	<div class="row-fluid">
 		<div class="span3">
 			<a class="brand" href="<?php bloginfo( 'url' ); ?>">

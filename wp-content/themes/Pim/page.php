@@ -99,7 +99,7 @@ get_header();
 				
 					<div class="content">
 				
-						<ul class="sidebar_widget">
+						<ul class="widget">
 						<?php dynamic_sidebar($page_sidebar); ?>
 						</ul>
 					
