@@ -519,7 +519,7 @@ function ranking($cat_id, $items = 10, $echo = TRUE, $sort = 'popular')
       $return_html.= '<div><a class="top title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
       $return_html.= '</div>';
 
-      $return_html.= '<div class="tagline">作者: '.get_the_author_meta('display_name', $post->post_author);
+      $return_html.= '<div class="tagline">';//  作者: '.get_the_author_meta('display_name', $post->post_author);
       $return_html.= '<div class="icon icon-heart"></div>';
       $return_html.= '<a href="'.get_permalink($post->ID).'#comments"><div class="icon icon-comments"></div></a>';
       $return_html.= '<a href="'.get_permalink($post->ID).'#share"><div class="icon icon-share"></div></a>';;

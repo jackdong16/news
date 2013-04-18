@@ -63,7 +63,10 @@
 <hr>
 
 <div class="row-fluid">
-	<div class="span8">
+	<div class="span6">
+		<?php dynamic_sidebar('Homepage Map Widget'); ?>
+	</div>
+	<div class="span6">
 		<div class="tabbable"> <!-- Only required for left/right tabs -->
 		  <ul class="nav nav-tabs">
 		    <!--<li class="active"><a href="#popular" data-toggle="tab">最火热</a></li>-->

@@ -11,6 +11,14 @@ get_header();
 ?>
 <div id="category">
 	<div class="row-fluid">
+		<div class="span8">
+			<?php dynamic_sidebar('Category Map Widget'); ?>
+		</div>
+		<div class="span4">
+			<?php dynamic_sidebar('Category Mini Feed'); ?>
+		</div>
+	</div>
+	<div class="row-fluid">
 		<?php peerapong_breadcrumbs(); ?>
 		<ul class="thumbnails">
 

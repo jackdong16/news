@@ -1,0 +1,125 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media print {
+  html, body {
+    height: auto;
+  }
+
+  #map_canvas {
+    height: 650px;
+  }
+}
+
+#map_canvas {
+  height: 400px;
+}
+
+.my-other-marker {
+  background: blue;
+  border: 2px solid #fff;
+  padding: 3px;
+}
+
+#log {
+  clear: both;
+}
+
+#content {
+  padding-left: 5px;
+}
+
+#marker-content {
+  width: 350px;
+  height: 150px;
+}
+
+.marker {
+  background: #fff;
+  border: 2px solid #4ea5d4;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: #888888 0 1px 10px 0px;
+  -webkit-box-shadow: #888888 0 1px 10px 0px;
+  box-shadow: #888888 0 1px 10px 0px;
+}
+
+.expanded {
+  width: 200px;
+  height: 200px;
+  z-index: 99;
+}
+
+.marker .carat {
+  background: url('../images/carat.png') 0 -7px no-repeat;
+  display: block;
+  height: 7px;
+  left: 50%;
+  margin-left: -7px;
+  position: absolute;
+  bottom: -7px;
+  width: 13px;
+}
+
+.marker .thumbnail img{
+  width: 75px;
+}
+
+.marker .name{
+  text-align: center;
+}
+
+.marker .star{
+  background: url('../images/star-gold24.png');
+  display: block;
+  top: -15px;
+  left: -15px;
+  height: 25px;
+  width: 24px;
+  position: absolute;
+}
+
+.marker .one{
+  width: 24px;
+}
+
+.marker .two{
+  width: 47px;
+}
+
+.marker .three{
+  width: 72px;
+}
+
+.marker .tag{
+  background: url(../images/tag.png) no-repeat;
+  position: absolute;
+  top: -5px;
+  left: -7px;
+  display: block;
+  width: 49px;
+  height: 25px;
+}
+
+.marker .recommended{
+  background-position:0 -125px;
+}
+
+.marker .mustgo{
+  background-position:-70px -125px;
+}
+
+.marker .popular{
+  background-position: -140px -125px;
+}
+
+

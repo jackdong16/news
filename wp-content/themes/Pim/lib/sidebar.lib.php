@@ -16,6 +16,7 @@ if ( function_exists('register_sidebar') )
 **/
 if ( function_exists('register_sidebar') ){
     register_sidebar(array('name' => 'Home Center Sidebar'));
+    register_sidebar(array('name' => 'Homepage Map Widget'));
     register_sidebar(array('name' => 'Popular Rank Widget'));
     register_sidebar(array('name' => 'Latest Rank Widget'));
     
@@ -24,14 +25,11 @@ if ( function_exists('register_sidebar') ){
     register_sidebar(array('name' => 'HP_2ndLayer_Right_Widget'));
     register_sidebar(array('name' => 'Forum Login Sidebar'));
 }
-    
-    
-/**
-*	Setup Page side bar
-**/
-if ( function_exists('register_sidebar') )
-    register_sidebar(array('name' => 'Page Sidebar'));
-    
+
+if ( function_exists('register_sidebar') ){
+    register_sidebar(array('name' => 'Category Map Widget'));
+    register_sidebar(array('name' => 'Category Mini Feed'));
+}
 /**
 *	Setup Contact side bar
 **/
@@ -50,6 +48,7 @@ if ( function_exists('register_sidebar') )
 if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'Footer Sidebar'));
     
+
     
 //Register dynamic sidebar
 $dynamic_sidebar = get_option('pp_sidebar');

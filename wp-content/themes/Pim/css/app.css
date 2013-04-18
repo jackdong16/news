@@ -307,6 +307,10 @@ ul.thumbnails li.span12 + li {
 	padding-left: 30px;
 }
 
+.widget .ranking .tagline .icon-heart{
+	padding-left: 0px;
+}
+
 .widget .ranking .vote, .widget .ranking .vote > i{
 	float: left;
 	width: 35px;

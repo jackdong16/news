@@ -219,8 +219,6 @@ if(isset($_GET['s']))
 
 						<li><?php wp_loginout(); ?></li>
 		                <li><?php wp_register(' ' , ' '); ?></li>
-		                <!-- <li><a href="wp-login.php" class="simplemodal-login">Log In</a></li>
-		                <li><a href="wp-login.php?action=register" class="simplemodal-register">Register</a></li> -->
 		                
 					</ul>
 				</div>

@@ -22,21 +22,21 @@ if ($authorName == $default_author) {
 		<ul id="usp_list">
 			<?php if ($usp_options['usp_title'] == 'show') { ?>
 			<li class="usp_title">
-				<label for="user-submitted-title" class="usp_label">标题</label>
+				<label for="user-submitted-title" class="usp_label">主题</label>
 				<div>
 					<input class="usp_input" type="text" name="user-submitted-title" id="user-submitted-title" value="" />
 				</div>
 			</li>
 			<?php } if ($usp_options['usp_content'] == 'show') { ?>
 			<li class="usp_content">
-				<label for="user-submitted-content" class="usp_label">内容</label>
+				<label for="user-submitted-content" class="usp_label">正文</label>
 				<div>
 					<textarea class="usp_textarea" name="user-submitted-content" id="user-submitted-content" rows="5"></textarea>
 				</div>
 			</li>
 			<?php } if (($usp_options['usp_name'] == 'show') && ($usp_options['usp_use_author'] == false)) { ?>
 			<li class="usp_name">
-				<label for="user-submitted-name" class="usp_label">名字</label>
+				<label for="user-submitted-name" class="usp_label">作者</label>
 				<div>
 					<input class="usp_input" type="text" name="user-submitted-name" id="user-submitted-name" value="" />
 				</div>
@@ -69,7 +69,7 @@ if ($authorName == $default_author) {
 			</li>
 			<?php } if ($usp_options['usp_captcha'] == 'show') { ?>
 			<li class="usp_captcha">
-				<label for="user-submitted-captcha" class="usp_label"><?php echo $usp_options['usp_question']; ?></label>
+				<label for="user-submitted-captcha" class="usp_label">安全问题：<?php echo $usp_options['usp_question']; ?></label>
 				<div>
 					<input class="usp_input" type="text" name="user-submitted-captcha" id="user-submitted-captcha" value="" />
 				</div>
@@ -77,7 +77,7 @@ if ($authorName == $default_author) {
 			<?php } if ($usp_options['usp_images'] == 'show') { ?>
 				<?php if($usp_options['max-images'] !== 0) { ?>
 				<li class="usp_images">
-					<label for="user-submitted-image" class="usp_label"><?php _e('Upload an Image'); ?></label>
+					<label for="user-submitted-image" class="usp_label">上传图片</label>
 					<div id="usp_upload-message"><?php echo $usp_options['upload-message']; ?></div>
 					<div>
 						<?php 
