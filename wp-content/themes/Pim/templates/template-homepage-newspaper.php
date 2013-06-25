@@ -6,7 +6,8 @@
 		<?php
 			if(!empty($featured_posts_arr))
 			{
-		?>
+		?>		
+				<h2 class="widgettitle">今日头条</h2>
 				<div id="myCarousel" class="carousel slide">
 				    <ol class="carousel-indicators">
 					    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -60,17 +61,16 @@
 	</div>
 </div>
 
-<hr>
-
+<!--
 <div class="row-fluid">
 	<div class="span6">
 		<?php dynamic_sidebar('Homepage Map Widget'); ?>
 	</div>
 	<div class="span6">
-		<div class="tabbable"> <!-- Only required for left/right tabs -->
+		<div class="tabbable"> <!-- Only required for left/right tabs
 		  <ul class="nav nav-tabs">
 		    <!--<li class="active"><a href="#popular" data-toggle="tab">最火热</a></li>-->
-		    <li><a href="#latest" data-toggle="tab">最新</a></li>
+		    <!--<li><a href="#latest" data-toggle="tab">最新</a></li>
 		  </ul>
 		  <div class="tab-content">
 		    <div class="tab-pane" id="popular">
@@ -83,17 +83,45 @@
 		</div>
 	</div>
 </div>
-
+-->
 <div class="row-fluid">
-	<div class="span4">
-		<?php dynamic_sidebar('HP_2ndLayer_Left_Widget'); ?>	
-	</div>
-
-	<div class="span4">
-		<?php dynamic_sidebar('HP_2ndLayer_Middle_Widget'); ?>
-	</div>
-
-	<div class="span4">
-		<?php dynamic_sidebar('HP_2ndLayer_Right_Widget'); ?>
+	<div class="span12">
+		<?php dynamic_sidebar('HP_Popular_Post_Widget'); ?>	
 	</div>
 </div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<?php dynamic_sidebar('HP_Category1_Widget'); ?>
+	</div>
+</div>
+	<div class="row-fluid">
+    	<div class="span12">
+			<div class="_ad_container">
+				<img class="offset4 _ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
+			</div>
+		</div>
+	</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<?php dynamic_sidebar('HP_Category2_Widget'); ?>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<?php dynamic_sidebar('HP_Category3_Widget'); ?>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<?php dynamic_sidebar('HP_Category4_Widget'); ?>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<?php dynamic_sidebar('HP_Category5_Widget'); ?>
+	</div>
+</div>
+</div> <!-- #main -->
+</div> <!-- page container -->

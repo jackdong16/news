@@ -14,8 +14,6 @@
  * @subpackage Filesystem
  * @uses WP_Filesystem_Base Extends class
  */
-ini_set('max_execution_time', 60);
-
 class WP_Filesystem_Direct extends WP_Filesystem_Base {
 	var $errors = null;
 	/**

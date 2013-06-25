@@ -68,7 +68,7 @@ get_header();
 <!--Title-->
 <div class="row-fluid">
 	<div class="span9">
-		<h4><?php the_title(); ?></h4>
+		<h1><?php the_title(); ?></h1>
 	</div>
 </div>
 <?php } ?>

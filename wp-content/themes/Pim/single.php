@@ -27,7 +27,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 <div class="row-fluid">
 	<div class="span9">
 		<?php if(function_exists('up_down_post_votes')) { $return_html.= up_down_post_votes( $post->ID ); }?>
-		<div id="post_title"><?php the_title(); ?></div>
+		<h1 id="post_title"><?php the_title(); ?></h1>
 
 		<div id="post_detail">
 			<!-- Posted by:&nbsp;<?php the_author_posts_link(); ?>&nbsp;&nbsp;&nbsp;
@@ -163,13 +163,13 @@ if (have_posts()) : while (have_posts()) : the_post();
 		   );
 		  $my_query = new WP_Query($args);
 		  if( $my_query->have_posts() ) {
-		  	echo '<br class="clear"/><h5>Related Posts</h5><hr/>';
-		  	echo '<ul class="posts related">';
+		  	echo '<br class="clear"/><h5>相关文章</h5><hr/>';
+		  	echo '<ul id="related">';
 		  
 		    while ($my_query->have_posts()) : $my_query->the_post(); 
 		    	$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true); 
 		    ?>
-		    	<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/timthumb.php?src=<?php echo $image_thumb; ?>&h=100&w=100&zc=1" alt="" class="thumbnail" /></a>
+		    	<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"></a>
 		      	<strong><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></strong><br/><a href="<?php echo gen_permalink(get_permalink(), 'quick_view=1'); ?>" class="quick_view"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a><?php the_time(get_option('date_format')); ?><br/><?php echo peerapong_substr(strip_shortcodes($post->post_content), 150); ?></li>
 		      <?php
 		    endwhile;

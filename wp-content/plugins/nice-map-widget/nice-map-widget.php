@@ -40,7 +40,7 @@ if (!class_exists("NiceMapWidget"))
       add_action( 'init', array( &$this, 'init_plugin' ));
       add_action( 'wp_ajax_get_nice_map_data', array( &$this, 'ajax_get_nice_map_data' ));
       add_action( 'wp_ajax_nopriv_get_nice_map_data', array( &$this, 'ajax_get_nice_map_data' ));
-      //add_action( 'save_post', array( &$this, 'save_post_and_code_address' ));
+      add_action( 'save_post', array( &$this, 'save_post_and_code_address' ));
     
       //add_action( 'wp_ajax_register_vote', array( &$this, 'ajax_register_vote' ));
       //add_action( 'wp_ajax_nopriv_register_vote', array( &$this, 'ajax_register_vote' ));
@@ -235,76 +235,12 @@ if (!class_exists("NiceMapWidget"))
       
     }
 
-    function lookup($string){
- 
-       $string = str_replace (" ", "+", urlencode($string));
-       $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$string."&sensor=false";
-     
-       $ch = curl_init();
-       curl_setopt($ch, CURLOPT_URL, $details_url);
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-       $response = json_decode(curl_exec($ch), true);
-     
-       // If Status Code is ZERO_RESULTS, OVER_QUERY_LIMIT, REQUEST_DENIED or INVALID_REQUEST
-       if ($response['status'] != 'OK') {
-        return null;
-       }
-     
-       print_r($response);
-       $geometry = $response['results'][0]['geometry'];
-     
-        $longitude = $geometry['location']['lat'];
-        $latitude = $geometry['location']['lng'];
-     
-        $array = array(
-            'latitude' => $geometry['location']['lng'],
-            'longitude' => $geometry['location']['lat'],
-            'location_type' => $geometry['location_type'],
-        );
-     
-        return $array;
-     
-    }
-
-
     //Move the codeAddress and save to DB upon saving any posts
-
     function save_post_and_code_address( $post_id ) {
 
-      $old_value = get_post_custom_values('address', $post_id);
+  
 
-      $string = $old_value[0];
-      $string = str_replace (" ", "+", urlencode($string));
-     $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$string."&sensor=false";
-   
-     $ch = curl_init();
-     curl_setopt($ch, CURLOPT_URL, $details_url);
-     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-     $response = json_decode(curl_exec($ch), true);
-   
-     // If Status Code is ZERO_RESULTS, OVER_QUERY_LIMIT, REQUEST_DENIED or INVALID_REQUEST
-    if ($response['status'] != 'OK') {
-      //return null;
-      //break;
-     }
-   
-     //print_r($response);
-     //echo "/n";
-     $geometry = $response['results'][0]['geometry'];
-
-      $array = array(
-          'latitude' => $geometry['location']['lat'],
-          'longitude' => $geometry['location']['lng'],
-          'location_type' => $geometry['location_type'],
-      );
-      $old_value = $array[0];
-      $return = $old_value['latitude'] + ", " + $old_value['longitude'];
-
-  echo $old_value;
-  print_r($old_value);
-
-
-      update_post_meta($post_id, 'address', $old_value);
+      update_post_meta($post_id, 'address', "test");
       
     }
 
@@ -318,7 +254,6 @@ if (!class_exists("NiceMapWidget"))
       $result = array( 'status' => '-1', 
                         'message' => '', 
                         'response' => ''
-                        //array( 'title' => null , 'address' => null)
                       );
 
       // if (!is_user_logged_in() && !$this->guest_allowed())
@@ -328,33 +263,73 @@ if (!class_exists("NiceMapWidget"))
       // }
       
       //Validate expected params
-      if ( ($_POST['cat_id'] == null) || ($_POST['sort_type'] == null) || ($_POST['items'] == null))
+      if ( ($_POST['sort_type'] == null) || ($_POST['items'] == null))
         die(json_encode($result));
 
       $cat_id = $_POST['cat_id'];
       $type = $_POST['sort_type'];
       $items = $_POST['items'];
 
-        // $args = array( 
-        //   'numberposts' => $items, 
-        //   'orderby' => 'date', 
-        //   'order' => 'DESC',
-        //   'meta_key' => 'address'
-        // );
+      if ($cat_id){
+        if ($type = 'recent'){
 
-        // $posts = get_posts( $args );
-
-    //    $posts = $wpdb->get_results("SELECT * FROM $wpdb->posts, $wpdb->postmeta WHERE post_type = 'post' AND post_status = 'publish' AND 'meta_key' = 'address' ORDER BY id DESC LIMIT 0 , ".$items);
-      //  $posts = $wpdb->get_results("SELECT $wpdb->posts.post_title FROM $wpdb->posts JOIN post_id ON $wpdb->posts.id = $wpdb->postmeta.post_id WHERE meta_key = 'address'");
-        $posts = $wpdb->get_results(
-          "
-          SELECT  post_title, id, post_content, meta_value
-          FROM    $wpdb->posts
-          JOIN $wpdb->postmeta
-          ON $wpdb->posts.id = $wpdb->postmeta.post_id
-          WHERE $wpdb->postmeta.meta_key = 'address'
-          "
+          $posts = $wpdb->get_results(
+            "
+            SELECT  post_title, id, post_content, meta_value
+            FROM    $wpdb->posts
+            JOIN $wpdb->postmeta
+            ON $wpdb->posts.id = $wpdb->postmeta.post_id
+            WHERE post_type = 'post' AND post_status = 'publish' AND meta_key = 'address' AND ID IN 
+            (Select object_id FROM $wpdb->term_relationships, $wpdb->terms WHERE $wpdb->term_relationships.term_taxonomy_id =".$cat.") ORDER BY post_date DESC
+            "
           );
+
+
+        }
+        if ($type = 'popular'){
+          $posts = $wpdb->get_results(
+            "
+            SELECT  post_title, id, post_content, meta_value
+            FROM    $wpdb->posts
+            JOIN $wpdb->postmeta
+            ON $wpdb->posts.id = $wpdb->postmeta.post_id
+            WHERE $wpdb->postmeta.meta_key = 'address'
+            "
+          );
+        }
+        else {} //Nothing
+      }
+      else{ //No cat id
+        if ($type = 'recent'){
+
+          $posts = $wpdb->get_results(
+            "
+            SELECT  post_title, id, post_content, meta_value
+            FROM    $wpdb->posts
+            JOIN $wpdb->postmeta
+            ON $wpdb->posts.id = $wpdb->postmeta.post_id
+            WHERE $wpdb->postmeta.meta_key = 'address'
+            "
+          );
+
+        }
+        if ($type = 'popular'){
+          $posts = $wpdb->get_results(
+            "
+            SELECT  post_title, id, post_content, meta_value
+            FROM    $wpdb->posts
+            JOIN $wpdb->postmeta
+            ON $wpdb->posts.id = $wpdb->postmeta.post_id
+            WHERE $wpdb->postmeta.meta_key = 'address'
+            "
+          );
+        }
+      }
+
+
+
+
+
 
     //  $posts = $wpdb->get_results("SELECT post_id, vote_count_up - vote_count_down AS difference FROM ".$wpdb->base_prefix."up_down_post_vote_totals ORDER BY difference");
     // $posts = $wpdb->get_results("SELECT comment_count, ID, post_title, post_content, post_date FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND category = ".$cat_id." ORDER BY comment_count DESC LIMIT 0 , ".$items);

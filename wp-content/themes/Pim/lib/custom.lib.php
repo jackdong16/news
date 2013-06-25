@@ -349,20 +349,27 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
 
   $pp_blog_cat = get_option('pp_blog_cat'); 
 	$return_html = '';
-	
-	if($sort == 'recent')
-	{
-		$posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&post_status=publish');
-		$title = 'Recent Posts';
-	}
-	else
-	{
-		global $wpdb;
-		
-		$posts = $wpdb->get_results("SELECT comment_count, ID, post_title, post_content, post_date FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' ORDER BY comment_count DESC LIMIT 0 , ".$items);
-		$title = 'Popular Posts';
-	}
 
+  $cat_id = get_category( get_query_var( 'cat' ) ) -> cat_ID;
+
+  if($cat_id){ //Recent cat posts TODO: Popular cat posts
+      $posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&category='.$cat_id);
+  }
+  else{
+      if($sort == 'recent')
+      {
+        $posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&post_status=publish');
+        //$title = 'Recent Posts';
+      }
+      else
+      {
+        global $wpdb;
+        
+        $posts = $wpdb->get_results("SELECT comment_count, ID, post_title, post_content, post_date FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' ORDER BY comment_count DESC LIMIT 0 , ".$items);
+        //$title = 'Popular Posts';
+      }
+  }
+	
 	if(!empty($posts))
 	{
 
@@ -415,7 +422,7 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
 	}
 }
 
-function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE, $truncate = 35) 
+function peerapong_cat_posts($cat_id = '', $items = 10, $echo = TRUE, $truncate = 35) 
 {
   $topNum = 1;
 	$return_html = '';
@@ -425,7 +432,7 @@ function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE, $truncate =
 	if(!empty($posts))
 	{
 
-		$return_html.= '<h4 class="widgettitle">'.$title.'</h4>';
+		$return_html.= '<a href=""><h4 class="widgettitle">'.$title.'</h4></a>';
 		$return_html.= '<ul class="category">';
 
       foreach($posts as $post)
@@ -443,18 +450,18 @@ function peerapong_cat_posts($cat_id = '', $items = 5, $echo = TRUE, $truncate =
 
             $image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
             //$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
-            $thumb = theme_thumb($image_thumb[0], 60, 60, 'c'); // Crops from center
-         
+            $thumb = theme_thumb($image_thumb[0], 270, 200, 'c'); // Crops from center
+                            
             if($image_thumb){
               $return_html.= '<div><a href="'.get_permalink($post->ID).'"><img class="thumbnail" src="'. $thumb.'"></a></div>';
             }
             $return_html.= '<div><a class="top title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
             $return_html.= '<a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a>';//.date('n月j日', strtotime($post->post_date)).'</div>';
-            $return_html.= '<div class="post_content">'.cn_substr(strip_tags(strip_shortcodes($post->post_content)), $truncate).'</div></div>';
+            //$return_html.= '<div class="post_content">'.cn_substr(strip_tags(strip_shortcodes($post->post_content)), $truncate).'</div></div>';
           }
           else{
-            $return_html.= '<li class="bullet">';
-            $return_html.= '<div><a class="title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';   
+            $return_html.= '<li>';
+            $return_html.= '<div><a class="title" href="'.get_permalink($post->ID).'"><img class="bullet" src="'.get_bloginfo( 'template_directory' ).'/images/bullet.png">'.$post->post_title.'</a>';   
           }
 
           $return_html.= '</li>';

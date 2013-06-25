@@ -68,7 +68,7 @@ a img {
 	border: 0;
 }
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, menu, nav, section {
 	display: block;
 }
 
@@ -286,7 +286,7 @@ object {
 /* =Header
 ----------------------------------------------- */
 
-#branding hgroup {
+#branding .site-branding {
 	margin-bottom: 1.3em;
 }
 #site-title,
@@ -368,6 +368,7 @@ header img {
 		left: 0.5em;
 		top: 3em;
  	width: 100%;
+ 	z-index: 99999;
 }
 .main-small-navigation .menu {
 	background: #f9f9f9;
@@ -514,6 +515,10 @@ body.singular .hentry {
 	display: block;
 	float: left;
 }
+.entry-meta .author-link {
+	display: block;
+	margin-top: 0.7em;
+}
 .entry-meta .comments-link {
 	display: block;
 	float: right;
@@ -644,7 +649,7 @@ dl.gallery-item {
 	display: block;
 	height: auto;
 	margin: 0 auto;
-	max-width: 100%; /* Fluid images for posts, comments, and widgets */
+	max-width: 100% !important; /* Fluid images for posts, comments, and widgets */
 }
 #content .gallery-columns-3 .gallery-item img,
 #content .gallery-columns-4 .gallery-item img,
@@ -750,8 +755,15 @@ and remove the padding rules below.
 	text-transform: uppercase;
 	top: -5px;
 }
-.entry-header hgroup .entry-title {
+.entry-header .entry-heading .entry-title {
 	padding-top: 0.8em;
+}
+.entry-header .entry-heading {
+	position: relative;
+}
+.entry-thumbnail {
+	margin-bottom: 0.7em;
+	text-align: center;
 }
 
 /* Singular content styles for Posts and Pages */
@@ -946,6 +958,7 @@ and remove the padding rules below.
 	border-bottom: 1px solid #ddd;
 	clear: both;
 	margin: 0;
+	overflow: hidden;
 	padding: 1em 0;
 }
 .widget:last-of-type {

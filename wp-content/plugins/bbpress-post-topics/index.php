@@ -5,10 +5,10 @@ Plugin Name: bbPress Topics for Posts
 Plugin URI: http://www.generalthreat.com/projects/bbpress-post-topics
 Description: Give authors the option to replace the comments on a WordPress blog post with a topic from an integrated bbPress install
 Author: David Dean
-Version: 1.6
-Revision Date: 04/14/2013
+Version: 1.7
+Revision Date: 05/15/2013
 Requires at least: WP 3.1, bbPress 2.0
-Tested up to: WP 3.6-beta1 , bbPress 2.3
+Tested up to: WP 3.6-beta3 , bbPress 2.3.2
 Author URI: http://www.generalthreat.com/
 */
 
@@ -75,7 +75,7 @@ class BBP_PostTopics {
 					'selected'		=> $bbpress_topic_options['forum_id'],
 					'options_only'	=> true
 				);
-				bbp_dropdown( $forum_dropdown_options ); 
+				bbp_dropdown( $forum_dropdown_options );
 				?>
 			</select><br />
 			
@@ -189,7 +189,7 @@ class BBP_PostTopics {
 
 		/** Only process for post types we specify */
 		if( !in_array( $post->post_type, apply_filters( 'bbppt_eligible_post_types', array( 'post', 'page' ) ) ) ) {
-			return;			
+			return;
 		}
 		
 		if( isset( $_POST['bbpress_topic'] ) ) {
@@ -303,7 +303,7 @@ class BBP_PostTopics {
 					update_post_meta( $post_ID, 'bbpress_discussion_topic_id', $topic_ID );
 					
 					/** Update topic with tags from the post */
-					if( $bbppt_options['copy_tags'] ) {
+					if( ! empty( $bbppt_options['copy_tags'] ) ) {
 						$post_tags = wp_get_post_tags( $post_ID );
 						$post_tags = array_map( create_function( '$term', 'return $term->name;' ), $post_tags );
 						wp_set_post_terms( $topic_ID, join( ',', $post_tags ), bbp_get_topic_tag_tax_id(), true );
@@ -311,7 +311,7 @@ class BBP_PostTopics {
 					}
 					
 					/** Export comments from the post to the new bbPress topic */
-					if( $bbppt_options['copy_comments'] ) {
+					if( ! empty( $bbppt_options['copy_comments'] ) ) {
 						bbppt_import_comments( $post_ID, $topic_ID );
 						update_post_meta( $post_ID, 'bbpress_discussion_comments_copied', time() );
 					}
@@ -374,7 +374,7 @@ class BBP_PostTopics {
 			delete_post_meta( $post_ID, 'bbpress_discussion_comments_copied' );
 		}
 		
-		$this->delete_draft_settings( $post_ID );
+		$this->delete_draft_settings( $post );
 		do_action( 'bbppt_topic_associated', $post_ID, $topic_ID );
 		
 	}
@@ -509,7 +509,7 @@ class BBP_PostTopics {
 				
 			}
 			
-		}		
+		}
 	}
 	
 	
@@ -551,6 +551,16 @@ class BBP_PostTopics {
 		
 		$ex_options = get_option( 'bbpress_discussion_defaults' );
 		
+		if( empty( $ex_options ) ) {
+		    $ex_options = array(
+			'enabled'       => false,
+			'forum_id'      => false,
+			'copy_tags'     => false,
+			'copy_comments' => false,
+			'display'       => false,
+			'display-extras' => false
+		    );
+		}
 		$forum_dropdown_options = array(
 			'selected'		=> $ex_options['forum_id'],
 			'options_only'	=> true
@@ -563,7 +573,7 @@ class BBP_PostTopics {
 		<input type="checkbox" name="bbpress_discussion_defaults[enabled]" id="bbpress_discussion_defaults_enabled" <?php checked($ex_options['enabled'],'on') ?>>
 		<label for="bbpress_discussion_defaults_enabled"><?php printf(__('Create a new bbPress topic in %s %s for new posts','bbpress-post-topics'), '</label>', $forum_select_string); ?> 
 
-		<?php if($ex_options['enabled'] == 'on') : ?>
+		<?php if( isset($ex_options['enabled'] ) && $ex_options['enabled'] == 'on') : ?>
 		&mdash; <a class="button" id="create_topics" href="#" title="<?php _e('Create topics and apply these settings to all existing posts','bbpress-post-topics') ?>"><?php _e('Apply settings to existing posts', 'bbpress-post-topics'); ?></a>
 		<?php endif; ?>
 		<br />
@@ -697,7 +707,10 @@ class BBP_PostTopics {
 
 		$defaults = get_option( 'bbpress_discussion_defaults' );
 		if( ! array_key_exists( 'display-extras', $defaults ) ) {
-			$defaults['display-extras'] = array();
+			$defaults['display-extras'] = array(
+			    'xcount' => 5,
+			    'xsort'  => 'newest'
+			);
 		}
 
 		$strings = get_option( 'bbpress_discussion_text' );
@@ -708,6 +721,9 @@ class BBP_PostTopics {
 			
 			/** Post has draft settings saved */
 			$options = $draft_settings;
+			
+			if( $topic_id = get_post_meta( $ID, 'bbpress_discussion_topic_id', true ) )
+				$options['topic_id'] = $topic_id;
 			
 		} else if(
 			get_post_meta( $ID, 'bbpress_discussion_use_defaults', true ) || 
@@ -723,10 +739,10 @@ class BBP_PostTopics {
 				'use_defaults'		=> true,
 				'topic_id'			=> get_post_meta( $ID, 'bbpress_discussion_topic_id', true ),
 				'slug'				=> get_post_meta( $ID, 'bbpress_discussion_topic_id', true ),
-				'forum_id'			=> $defaults['forum_id'],
-				'copy_tags'			=> $defaults['copy_tags'],
-				'copy_comments'		=> $defaults['copy_comments'],
-				'display'			=> $defaults['display'],
+				'forum_id'			=> empty( $defaults['forum_id'] ) ? false: $defaults['forum_id'],
+				'copy_tags'			=> empty( $defaults['copy_tags'] ) ? false : $defaults['copy_tags'],
+				'copy_comments'		=> empty( $defaults['copy_comments'] ) ? false : $defaults['copy_comments'],
+				'display'			=> empty( $defaults['display'] ) ? false : $defaults['display'],
 				'display-extras'	=> $display_extras,
 				'text'				=> $strings
 			);
@@ -765,8 +781,8 @@ class BBP_PostTopics {
 				'use_defaults'		=> false,
 				'topic_id'			=> get_post_meta( $ID, 'bbpress_discussion_topic_id', true ),
 				'slug'				=> get_post_meta( $ID, 'bbpress_discussion_topic_id', true ),
-				'copy_tags'			=> $defaults['copy_tags'],
-				'copy_comments'		=> $defaults['copy_comments'],
+				'copy_tags'			=> empty( $defaults['copy_tags'] ) ? false : $defaults['copy_tags'],
+				'copy_comments'		=> empty( $defaults['copy_comments'] ) ? false : $defaults['copy_comments'],
 				'display'			=> $display,
 				'display-extras'	=> $display_extras,
 				'text'				=> $strings
@@ -799,6 +815,18 @@ class BBP_PostTopics {
 		$post = get_post( $post );
 		if( ! is_object( $post ) )	return false;
 		
+		if( ! array_key_exists( 'use_defaults', $settings ) )
+			$settings['use_defaults'] = false;
+		
+		if( ! array_key_exists( 'topic_id', $settings ) )
+			$settings['topic_id'] = false;
+		
+		if( ! array_key_exists( 'copy_tags', $settings ) )
+			$settings['copy_tags'] = false;
+		
+		if( ! array_key_exists( 'copy_comments', $settings ) )
+			$settings['copy_comments'] = false;
+		
 		update_post_meta( $post->ID, 'bbppt_draft_settings', $settings );
 		
 	}
@@ -808,7 +836,7 @@ class BBP_PostTopics {
 		$post = get_post( $post );
 		if( ! is_object( $post ) )	return false;
 		
-		return delete_post_meta( $post->ID, 'bbppt_draft_settings', true );
+		return delete_post_meta( $post->ID, 'bbppt_draft_settings' );
 		
 	}
 

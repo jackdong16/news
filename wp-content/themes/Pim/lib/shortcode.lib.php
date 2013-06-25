@@ -418,7 +418,7 @@ function cat_posts_func($atts, $content) {
 	//extract short code attr
 	extract(shortcode_atts(array(
 		'cat_id' => '',
-		'items' => 5,
+		'items' => 10,
 		'truncate' => 35,
 	), $atts));
 

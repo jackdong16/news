@@ -7,7 +7,8 @@ body{
 
 a {
 	/*color: #397591;*/
-	color: #004276;
+	/*color: #004276;*/
+	color: black;
 }
 
 legend {
@@ -27,6 +28,17 @@ hr{
 
 .navbar{
 	margin-bottom: 0;
+}
+
+.container-fluid{
+	max-width: 960px;
+	margin: 0 auto;
+	-moz-box-shadow: 0 5px 10px #888;
+	-webkit-box-shadow: 0 5px 10px #888;
+	box-shadow: 0 5px 10px #888;
+	/**background: url("../../images/back.png") repeat scroll 0 0 #F4F6F9;**/
+	background-color: #FEFEFE;
+	padding: 0;
 }
 
 /*******************/
@@ -123,6 +135,18 @@ ul.thumbnails li.span12 + li {
   margin-left : 0px;
 }
 
+#header{
+	margin: 0 auto;
+    max-width: 940px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#main{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .top-bar{
 	max-width: 960px;
 	margin: 0 auto;
@@ -134,25 +158,19 @@ ul.thumbnails li.span12 + li {
 .navbar-inner{
 	border-radius: 0;
 }
-
-#webname{
+/** Old non mashable.com menu style
+#webname{ 
 	font-size: 31px;
 	padding-top: 4px;
 }
 
-#main{
-	-moz-box-shadow: 0 5px 10px #888;
-	-webkit-box-shadow: 0 5px 10px #888;
-	box-shadow: 0 5px 10px #888;
-	/**background: url("../../images/back.png") repeat scroll 0 0 #F4F6F9;**/
-	background-color: #FEFEFE;
-}
+**/
 
-.container-fluid{
-	max-width: 960px;
-	margin: 0 auto;
-	padding-left: 20px;
-	padding-right: 20px;
+#webname{
+	float: left;
+	font-size: 25px;
+	color: white;
+	padding-top: 11px;
 }
 
 #wrapper{
@@ -168,6 +186,11 @@ ul.thumbnails li.span12 + li {
 .brand{
 	color: #0C3045;
 }
+
+/**** HELPER CSS ****/
+
+
+
 
 /**** TOP NAV ****/
 #navbar .nav-pills > li > a{
@@ -209,8 +232,21 @@ ul.thumbnails li.span12 + li {
 	padding-bottom: 5px;
 }
 
-/** WIDGET SECTION **/
+._ad_container{
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll left top #F0EEE9;
+    border-color: #E3E3E3;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 10px 0;
+    margin: 0 -10px;
+}
 
+/** WIDGET SECTION **/
 .widget{
 	list-style: none;
 	margin: 0;
@@ -218,7 +254,7 @@ ul.thumbnails li.span12 + li {
 	padding-bottom: 10px;
 }
 
-.widgettitle{
+/*.widgettitle{
 	max-width: 370px;
 	line-height: 15px;
 	padding-left: 5px;
@@ -226,6 +262,11 @@ ul.thumbnails li.span12 + li {
 	font-size: 14px;
 	height:25px;
 	background:url("../images/bg.png") 0 -49px;
+}*/
+
+.widgettitle{
+	font-size: 20px;
+	border-bottom: 1px solid #E3E3E3;
 }
 
 .widget a.top{
@@ -258,24 +299,30 @@ ul.thumbnails li.span12 + li {
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
 	-ms-text-overflow: ellipsis;
-	overflow: hidden;
 	white-space: nowrap;
 	width: 85%;
 }
 
+@-moz-document url-prefix() {
+	.widget .posts .title{
+		overflow: hidden;
+	}
+}
+
 .widget .bullet{
 	list-style-type: circle;
-	margin-bottom: 10px;
 }
 
 .widget .mini .title{
 	float: left;
+	overflow: hidden;
 }
 
 .widget .posts .ago{
 	font-size: 10px;
 	color: gray;
 	width: 20%;
+	line-height: 22px;
 }
 
 .widget .ranking .title{
@@ -284,10 +331,15 @@ ul.thumbnails li.span12 + li {
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
 	-ms-text-overflow: ellipsis;
-	overflow: hidden;
 	white-space: nowrap;
 	width: 85%;
 	padding-top: 10px;
+}
+
+@-moz-document url-prefix() {
+	.widget .ranking .title{
+		overflow: hidden;
+	}
 }
 
 .widget .ranking > li{
@@ -524,14 +576,16 @@ div.clickable a {
 /****** POST / PAGE ******/
 #post_title{
 	font-family: '微软雅黑';
-    font-size: 26px;
-    padding-bottom: 15px;
-    padding-top: 15px;
+    font-size: 30px;
 }
 
 #post_detail{
 	color: #666666;
 	font-size: 10px;
+}
+
+#related{
+	list-style: none;
 }
 
 
@@ -540,8 +594,6 @@ div.clickable a {
     border-top: 1px solid #08212F;
     padding: 30px 0;
     text-align: center;
-    margin-left: -20px;
-    margin-right: -20px;
     color: #707476;
     border: 1px solid #000;
     background-image: linear-gradient(to bottom, #0C3045, #08212F);
@@ -645,7 +697,7 @@ div.clickable a {
 
 @media only screen and (max-width: 964px){
 	.fixed_height{
-		height: 266px;
+		height: 327px;
 		overflow: hidden;
 	}
 }

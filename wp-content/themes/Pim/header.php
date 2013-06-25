@@ -152,129 +152,86 @@ if(isset($_GET['s']))
 	<input type="hidden" id="pp_portfolio_auto_scroll" name="pp_portfolio_auto_scroll" value="<?php echo $pp_portfolio_auto_scroll; ?>"/>
 	<input type="hidden" id="pp_color" name="pp_color" value="<?php echo $pp_color; ?>"/>
 
-
-	<div class="navbar">
-	    <div class="navbar-inner">
-		    <div class="container-fluid">
-		    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-		  	    </a>
-
-		  	    <div class="nav-collapse collapse">
-					<?php 	
-					    wp_nav_menu( 
-					        	array( 
-					        		'menu_id'			=> 'top_menu',
-					        		'menu_class'		=> 'nav',
-					        		'theme_location' 	=> 'top-menu',
-					        	) 
-					    ); 
-					?>
-
-					<form class="navbar-search pull-right">
-				    	<?php get_search_form(true); ?>
-				    </form>
-
-					<ul class="nav pull-right">
-						<li>
-							<a href="<?php bloginfo('rss2_url'); ?>">
-								<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_rss.png" alt="RSS"/>
-							</a>
-						</li>
-						<?php
-							//Twitter
-							$pp_twitter_url = get_option('pp_twitter_url');
-							if(!empty($pp_twitter_url))
-							{
-						?>
+	
+		<div class="navbar">
+		    <div class="navbar-inner">
+			    <div id="header">
+			    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+			  	    </a>
+			  	    <div class="nav-collapse collapse">
 						
-						<li>
-							<a href="<?php echo $pp_twitter_url; ?>">
-								<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_twitter.png" alt="Twitter"/>
-							</a>
-						</li>
-						
-						<?php
-							}
-						?>
-						
-						<?php
-							//Facebook
-							$pp_facebook_url = get_option('pp_facebook_url');
-							if(!empty($pp_facebook_url))
-							{
-						?>
-						
-						<li>
-							<a href="<?php echo $pp_facebook_url; ?>">
-								<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_facebook.png" alt="Facebook"/>
-							</a>
-						</li>
-						
-						<?php
-							}
-						?>
+						<div id="navbar">
 
-						<li><?php wp_loginout(); ?></li>
-		                <li><?php wp_register(' ' , ' '); ?></li>
-		                
-					</ul>
+						<a href="/"><span id="webname"><?php bloginfo('name'); ?></span></a>
+							<?php 
+							    wp_nav_menu( array(
+							        'menu'       => 'top_nav',
+							        'depth'      => 2,
+							        'container'  => false,
+							        'menu_class' => 'nav',
+							        'theme_location' => 'primary-menu',
+							        //Process nav menu using our custom nav walker
+							        'walker' => new twitter_bootstrap_nav_walker())
+							    );
+							?>
+						</div>
+
+						<form class="navbar-search pull-right">
+					    	<?php get_search_form(true); ?>
+					    </form>
+
+						<ul class="nav pull-right">
+							<li>
+								<a href="<?php bloginfo('rss2_url'); ?>">
+									<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_rss.png" alt="RSS"/>
+								</a>
+							</li>
+							<?php
+								//Twitter
+								$pp_twitter_url = get_option('pp_twitter_url');
+								if(!empty($pp_twitter_url))
+								{
+							?>
+							
+							<li>
+								<a href="<?php echo $pp_twitter_url; ?>">
+									<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_twitter.png" alt="Twitter"/>
+								</a>
+							</li>
+							
+							<?php } ?>
+							
+							<?php
+								//Facebook
+								$pp_facebook_url = get_option('pp_facebook_url');
+								if(!empty($pp_facebook_url))
+								{
+							?>
+								<li>
+									<a href="<?php echo $pp_facebook_url; ?>">
+										<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/icon_facebook.png" alt="Facebook"/>
+									</a>
+								</li>
+							<?php } ?>
+
+							<li><?php wp_loginout(); ?></li>
+			                <li><?php wp_register(' ' , ' '); ?></li>
+			                
+						</ul>
+					</div>
+				</div>
+			    
+		    </div>
+	    </div>
+<div class="container-fluid">
+	<div id="main"> 
+		<div class="row-fluid">
+	    	<div class="span12">
+				<div class="_ad_container">
+					<img class="offset4 _ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
 				</div>
 			</div>
-		    
-	    </div>
-    </div>
-<div id="main" class="container-fluid">
-	<div class="row-fluid">
-		<div class="span3">
-			<a class="brand" href="<?php bloginfo( 'url' ); ?>">
-	    	<?php
-				//get custom logo
-				$pp_logo = get_option('pp_logo');
-				
-				if(empty($pp_logo))
-				{	
-					if($pp_skin != 'black')
-					{
-						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_black.png';
-					}
-					else
-					{
-						//$pp_logo = get_bloginfo( 'stylesheet_directory' ).'/images/logo_white.png';
-					}
-				}
-			?>
-			<h1 id="webname"><?php bloginfo('name'); ?></h1></a>
-			<!--<a id="custom_logo" href="<?php bloginfo( 'url' ); ?>"><img src="<?php echo $pp_logo; ?>" alt=""/></a>-->
 		</div>
-
-		<div class="span4">
-			
-			<img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
-			
-		</div>
-
-		<div class="span4">
-			<img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
-		</div>
-	</div>
-
-	<div class="row-fluid"> 
-		<div class="span9">
-			<div id="navbar">
-				<?php 
-				    wp_nav_menu( array(
-				        'menu'       => 'main_nav',
-				        'depth'      => 2,
-				        'container'  => false,
-				        'menu_class' => 'nav nav-pills',
-				        'theme_location' => 'primary-menu',
-				        //Process nav menu using our custom nav walker
-				        'walker' => new twitter_bootstrap_nav_walker())
-				    );
-				?>
-			</div>
-		</div>
-	</div>
