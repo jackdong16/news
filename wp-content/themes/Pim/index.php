@@ -18,15 +18,6 @@ if(empty($pp_featured_items))
 	$pp_featured_items = 5;
 }
 
-$args = array( 
-  'numberposts' => $homepage_carousel_number, 
-  'orderby' => 'date', 
-  'order' => 'DESC',
-  'meta_key' => '_thumbnail_id'
-);
-
-$featured_posts_arr = get_posts( $args );
-
 get_header(); 
 
 $pp_homepage_style = get_option('pp_homepage_style');

@@ -11,11 +11,14 @@ get_header();
 ?>
 <div id="category">
 	<div class="row-fluid">
-		<div class="span8">
-			<?php dynamic_sidebar('Category Map Widget'); ?>
+		<div class="span3">
+			<?php dynamic_sidebar('Category Recent Mini Feed'); ?>
 		</div>
-		<div class="span4">
-			<?php dynamic_sidebar('Category Mini Feed'); ?>
+		<div class="span6">
+			<?php dynamic_sidebar('Category Carousel'); ?>
+		</div>
+		<div class="span3">
+			<?php dynamic_sidebar('Category Popular Mini Feed'); ?>
 		</div>
 	</div>
 	<div class="row-fluid">

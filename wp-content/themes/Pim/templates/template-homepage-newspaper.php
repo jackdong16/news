@@ -3,53 +3,7 @@
 		<?php dynamic_sidebar('HP_Top_Left_Sidebar'); ?>
 	</div>
 	<div class="span6">
-		<?php
-			if(!empty($featured_posts_arr))
-			{
-		?>		
-				<h2 class="widgettitle">今日头条</h2>
-				<div id="myCarousel" class="carousel slide">
-				    <ol class="carousel-indicators">
-					    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					    <li data-target="#myCarousel" data-slide-to="1"></li>
-					    <li data-target="#myCarousel" data-slide-to="2"></li>
-					    <li data-target="#myCarousel" data-slide-to="3"></li>
-					    <li data-target="#myCarousel" data-slide-to="4"></li>
-				    </ol>
-						<div class="carousel-inner">
-							<?php
-								$first_flag = true;
-								foreach($featured_posts_arr as $featured_post)
-								{
-									$image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $featured_post->ID ), 'single-post-thumbnail' );
-									//$image_url = get_post_meta($featured_post->ID, 'blog_thumb_image_url', true);	
-							?>
-								<?php if ($image_url) { ?>
-									<?php $thumb = theme_thumb($image_url[0], 468, 300, 'c'); // Crops from center ?>
-									<div class="<?php if ($first_flag) echo "active" ?> item">
-										<a href="<?php echo $featured_post->guid; ?>" title="<?php echo $featured_post->post_title; ?>">
-											<img src="<?php echo $thumb ?>">
-									    	<div class="carousel-caption">
-							                  <h4><?php echo $featured_post->post_title; ?></h4>
-							                  <!-- <p><?php echo _substr(strip_tags(strip_shortcodes($featured_post->post_content)), 300); ?></p> -->
-							                </div>
-						                </a>
-									</div>
-								
-
-							<?php
-									$first_flag = false;
-									}
-								}
-							?>
-					
-						</div>
-					<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-					<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-				</div>
-		<?php
-			}
-		?>
+		<?php dynamic_sidebar('HP_Carousel_Widget'); ?>
 		<div id="homepage_new_post">
 			<a href="javascript:;" rel="165" class="btn btn-primary btn-large postpopup" data-loading-text="等一下..">
 				分享吧！

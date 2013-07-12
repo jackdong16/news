@@ -231,7 +231,9 @@ if(isset($_GET['s']))
 		<div class="row-fluid">
 	    	<div class="span12">
 				<div class="_ad_container">
-					<img class="offset4 _ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/340_60.jpeg">
+					<a href="http://fdelivery.ca/" target="_blank"><img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/fdelivery.jpg"></a>
+					<a href="http://www.mamaskitchencabinet.com/" target="_blank"><img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/mama-kitchen.jpg"></a>
+					<a href="http://www.victorcollege.ca/" target="_blank"><img class="_ad_top" src="<?php bloginfo( 'stylesheet_directory' ); ?>/ads/victor_college.png"></a>
 				</div>
 			</div>
 		</div>

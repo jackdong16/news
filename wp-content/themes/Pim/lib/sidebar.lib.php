@@ -1,14 +1,8 @@
 <?php
-/**
-*	Setup Home left column side bar
-**/
+
 if ( function_exists('register_sidebar') )
     register_sidebar(array('name' => 'HP_Top_Left_Sidebar'));
-    
-/**
-*	Setup Home right column side bar
-**/
-if ( function_exists('register_sidebar') )
+    register_sidebar(array('name' => 'HP_Carousel_Widget'));
     register_sidebar(array('name' => 'HP_Top_Right_Sidebar'));
     
 /**
@@ -30,8 +24,9 @@ if ( function_exists('register_sidebar') ){
 }
 
 if ( function_exists('register_sidebar') ){
-    register_sidebar(array('name' => 'Category Map Widget'));
-    register_sidebar(array('name' => 'Category Mini Feed'));
+    register_sidebar(array('name' => 'Category Recent Mini Feed'));
+    register_sidebar(array('name' => 'Category Carousel'));
+    register_sidebar(array('name' => 'Category Popular Mini Feed'));
 }
 /**
 *	Setup Contact side bar

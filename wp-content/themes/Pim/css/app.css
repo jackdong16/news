@@ -30,6 +30,10 @@ hr{
 	margin-bottom: 0;
 }
 
+.navbar .nav > li > a {
+	padding: 10px;
+}
+
 .container-fluid{
 	max-width: 960px;
 	margin: 0 auto;
@@ -244,6 +248,7 @@ ul.thumbnails li.span12 + li {
     border-width: 0 1px 1px;
     padding: 10px 0;
     margin: 0 -10px;
+    padding-left: 10px;
 }
 
 /** WIDGET SECTION **/

@@ -352,8 +352,22 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
 
   $cat_id = get_category( get_query_var( 'cat' ) ) -> cat_ID;
 
-  if($cat_id){ //Recent cat posts TODO: Popular cat posts
-      $posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&category='.$cat_id);
+  if($cat_id){ //Recent cat posts
+      if($sort == 'recent')
+        $posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&category='.$cat_id);
+      elseif($sort == 'popular' && $mini == TRUE){
+        if (function_exists('get_most_viewed_category')){
+          $return_html.= get_most_viewed_category($cat_id, '',10 , 30,false);
+        }
+          if($echo)
+            {
+              echo $return_html;
+            }
+            else
+            {
+              return $return_html;
+            }
+      }
   }
   else{
       if($sort == 'recent')
@@ -361,13 +375,14 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
         $posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&post_status=publish');
         //$title = 'Recent Posts';
       }
-      else
-      {
-        global $wpdb;
+      // Dont like how they show popular post by counting the number of comments
+      // else
+      // {
+      //   global $wpdb;
         
-        $posts = $wpdb->get_results("SELECT comment_count, ID, post_title, post_content, post_date FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' ORDER BY comment_count DESC LIMIT 0 , ".$items);
-        //$title = 'Popular Posts';
-      }
+      //   $posts = $wpdb->get_results("SELECT comment_count, ID, post_title, post_content, post_date FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' ORDER BY comment_count DESC LIMIT 0 , ".$items);
+      //   //$title = 'Popular Posts';
+      // }
   }
 	
 	if(!empty($posts))
@@ -381,7 +396,7 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
         if($mini){
           $return_html.= '<li class="mini"><div>';
           $return_html.= '<a class="bold title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
-          $return_html.= '<span class="ago"> '. cn_ago(strtotime($post->post_date)) .'</span>';
+          if (!$cat_id) $return_html.= '<span class="ago"> '. cn_ago(strtotime($post->post_date)) .'</span>'; //hide x days ago in category because not enough articles
           $return_html.= '</div></li>';
         }
         else{
@@ -422,9 +437,8 @@ function peerapong_posts($sort = 'recent', $items = 5, $echo = TRUE, $mini = FAL
 	}
 }
 
-function peerapong_cat_posts($cat_id = '', $items = 10, $echo = TRUE, $truncate = 35) 
+function cat_posts($cat_id = '', $items = 10, $echo = TRUE, $truncate = 35) 
 {
-  $topNum = 1;
 	$return_html = '';
 	$posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&category='.$cat_id);
 	$title = get_cat_name($cat_id);
@@ -432,9 +446,16 @@ function peerapong_cat_posts($cat_id = '', $items = 10, $echo = TRUE, $truncate 
 	if(!empty($posts))
 	{
 
-		$return_html.= '<a href=""><h4 class="widgettitle">'.$title.'</h4></a>';
-		$return_html.= '<ul class="category">';
+		$return_html.= '<a href="'.get_category_link($cat_id).'"><h4 class="widgettitle">'.$title.'</h4></a>';
+    $return_html.= '<div class="row-fluid">';
+    $return_html.= '<div class="span4">';
+    if(!$mini){ 
+      $return_html.= carousel($cat_id, $items, $echo, $sort = 'recent', $showTitle = FALSE);
+    }
+    $return_html.= '</div>';
 
+    $return_html.= '<div class="span4">';
+		$return_html.= '<ul class="category">';
       foreach($posts as $post)
       {
         if($mini){
@@ -445,31 +466,20 @@ function peerapong_cat_posts($cat_id = '', $items = 10, $echo = TRUE, $truncate 
           $return_html.= '</div></li>';
         }
         else{
-          if($topNum > 0){
-            $return_html.= '<li class="top">';
-
-            $image_thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-            //$image_thumb = get_post_meta($post->ID, 'blog_thumb_image_url', true);
-            $thumb = theme_thumb($image_thumb[0], 270, 200, 'c'); // Crops from center
-                            
-            if($image_thumb){
-              $return_html.= '<div><a href="'.get_permalink($post->ID).'"><img class="thumbnail" src="'. $thumb.'"></a></div>';
-            }
-            $return_html.= '<div><a class="top title" href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
-            $return_html.= '<a href="'.gen_permalink(get_permalink($post->ID), 'quick_view=1').'" class="quick_view" title="Quick View"><img src="'.get_bloginfo( 'stylesheet_directory' ).'/images/icon_quick_view.png" style="width:16px" class="mid_align"/></a>';//.date('n月j日', strtotime($post->post_date)).'</div>';
-            //$return_html.= '<div class="post_content">'.cn_substr(strip_tags(strip_shortcodes($post->post_content)), $truncate).'</div></div>';
-          }
-          else{
             $return_html.= '<li>';
             $return_html.= '<div><a class="title" href="'.get_permalink($post->ID).'"><img class="bullet" src="'.get_bloginfo( 'template_directory' ).'/images/bullet.png">'.$post->post_title.'</a>';   
-          }
-
-          $return_html.= '</li>';
         }
-        $topNum--;
       } 
-
 		$return_html.= '</ul>';
+    $return_html.= '</div>'; //span4 
+
+    $return_html.= '<div class="span4"><h5>最热门</h5>';
+
+    if (function_exists('get_most_viewed_category')){
+      $return_html.= get_most_viewed_category($cat_id, '',10 , 30,false);
+    }
+    $return_html.= '</div>'; //span4   
+
 
 	}
 	
@@ -548,6 +558,98 @@ function ranking($cat_id, $items = 10, $echo = TRUE, $sort = 'popular')
     return $return_html;
   }
 
+}
+
+function carousel($cat_id, $items = 5, $echo = TRUE, $sort = 'recent', $showTitle = TRUE)
+{
+  //TODO: Add recent/popular carousel images 
+
+  $return_html = '';
+
+  $category = get_the_category()[0]; 
+
+  if($cat_id || $category){
+
+     $posts = get_posts('numberposts='.$items.'&order=DESC&orderby=date&category='.$cat_id);
+
+  }
+  else{
+      $args = array( 
+      'numberposts' => $items, 
+      'orderby' => 'date', 
+      'order' => 'DESC',
+      'meta_key' => '_thumbnail_id'
+    );
+
+    $posts = get_posts( $args );
+  }
+  
+  if(!empty($posts))
+    {
+      if($showTitle){
+        //if($cat_id) { $return_html.= '<h2 class="widgettitle">'. get_the_category( $cat_id )[0]->cat_name .'</h>';}
+        $return_html.= $cat_id;
+        //$return_html.= $category;
+
+        $return_html.= '<h2 class="widgettitle">今日头条</h>';
+      }
+
+      $return_html.= '
+
+        <div id="myCarousel" class="carousel slide">
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+              <li data-target="#myCarousel" data-slide-to="3"></li>
+              <li data-target="#myCarousel" data-slide-to="4"></li>
+            </ol>
+          <div class="carousel-inner">
+      ';
+
+      $first_flag = true;
+      foreach($posts as $post)
+      {
+
+        $image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+
+        if ($image_url){
+          $thumb = theme_thumb($image_url[0], 468, 300, 'c');
+
+          $return_html.= '<div class="';
+            if($first_flag){ $return_html.= 'active';}
+          $return_html.= ' item">';
+          $return_html.= '<a href="'.$post->guid.'" title="'. $post->post_title .'">';
+          $return_html.= '<img src="'.$thumb.'">';
+          $return_html.= '<div class="carousel-caption"><h4>'.$post->post_title;
+          $return_html.= '</h4>'; 
+          $return_html.= '</div>
+                      </a>
+                  </div>';
+        $first_flag = false;
+        }
+      } 
+
+      if(!$cat_id){
+        $return_html.= '</div>
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          </div>';
+      }
+      else{
+        $return_html.= '</div>
+          </div>';
+      }
+    }
+
+  if($echo)
+  {
+    echo $return_html;
+  }
+  else
+  {
+    return $return_html;
+  }
 }
 
 function peerapong_recent_comments($items = 5, $echo = TRUE) 

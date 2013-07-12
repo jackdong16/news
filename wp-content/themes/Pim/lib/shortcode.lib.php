@@ -397,6 +397,20 @@ function mini_recent_posts_func($atts) {
 add_shortcode('mini_recent_posts', 'mini_recent_posts_func');
 
 
+function mini_popular_posts_func($atts) {
+	
+	//extract short code attr
+	extract(shortcode_atts(array(
+		'items' => 20,
+	), $atts));
+
+	$return_html = peerapong_posts('popular', $items, FALSE, TRUE); //Mini option = true
+	
+	return $return_html;
+}
+add_shortcode('mini_popular_posts', 'mini_popular_posts_func');
+
+
 
 function popular_posts_func($atts) {
 
@@ -422,7 +436,7 @@ function cat_posts_func($atts, $content) {
 		'truncate' => 35,
 	), $atts));
 
-	$return_html = peerapong_cat_posts($cat_id, $items, FALSE, $truncate); //Truncate #
+	$return_html = cat_posts($cat_id, $items, FALSE, $truncate); //Truncate #
 	
 	return $return_html;
 }
@@ -442,6 +456,22 @@ function ranking_func($atts, $content) {
 	return $return_html;
 }
 add_shortcode('ranking', 'ranking_func');
+
+function carousel_func($atts, $content) {
+
+	//extract short code attr
+	extract(shortcode_atts(array(
+		'cat_id' => '',
+		'type' => 'recent',
+		'items' => 5,
+		'showTitle' => TRUE,
+	), $atts));
+
+	$return_html = carousel($cat_id, $items, FALSE, $type, $showTitle); //Truncate #
+	
+	return $return_html;
+}
+add_shortcode('carousel', 'carousel_func');
 
 
 function recent_comments_func($atts, $content) {
